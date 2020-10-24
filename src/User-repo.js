@@ -9,8 +9,8 @@ class UserRepo {
     return dataSet.filter((userData) => id === userData.userID);
   };
   calculateAverageStepGoal() {
-    var totalStepGoal = this.users.reduce((sumSoFar, data) => {
-      return sumSoFar = sumSoFar + data.dailyStepGoal;
+    var totalStepGoal = this.users.reduce((total, data) => {
+      return total = total + data.dailyStepGoal;
     }, 0);
     return totalStepGoal / this.users.length;
   };
@@ -49,30 +49,28 @@ class UserRepo {
       return objectSoFar;
     }, {});
   }
+
+  getAverageOfValues(data) {
+    return data.reduce((total, value) => {
+      total += value;
+      return total;
+    }, 0) / data.length;
+  }
+
   rankUserIDsbyRelevantDataValue(dataSet, date, relevantData, listFromMethod) {
-    let sortedObjectKeys = this.isolateUsernameAndRelevantData(dataSet, date, relevantData, listFromMethod)
-    return Object.keys(sortedObjectKeys).sort(function(b, a) {
-      return (sortedObjectKeys[a].reduce(function(sumSoFar, sleepQualityValue) {
-        sumSoFar += sleepQualityValue
-        return sumSoFar;
-      }, 0) / sortedObjectKeys[a].length) - (sortedObjectKeys[b].reduce(function(sumSoFar, sleepQualityValue) {
-        sumSoFar += sleepQualityValue
-        return sumSoFar;
-      }, 0) / sortedObjectKeys[b].length)
+    let sortedObjectKeys = this.isolateUsernameAndRelevantData(dataSet, date, relevantData, listFromMethod);
+    return Object.keys(sortedObjectKeys).sort((b, a) => {
+      return (this.getAverageOfValues(sortedObjectKeys[a])) - (this.getAverageOfValues(sortedObjectKeys[b]));
     });
   }
+
   combineRankedUserIDsAndAveragedData(dataSet, date, relevantData, listFromMethod) {
     let sortedObjectKeys = this.isolateUsernameAndRelevantData(dataSet, date, relevantData, listFromMethod)
     let rankedUsersAndAverages = this.rankUserIDsbyRelevantDataValue(dataSet, date, relevantData, listFromMethod)
-    return rankedUsersAndAverages.map(function(rankedUser) {
-      rankedUser = {
-        [rankedUser]: sortedObjectKeys[rankedUser].reduce(
-          function(sumSoFar, sleepQualityValue) {
-            sumSoFar += sleepQualityValue
-            return sumSoFar;
-          }, 0) / sortedObjectKeys[rankedUser].length
+    return rankedUsersAndAverages.map(rankedUser => {
+      return rankedUser = {
+        [rankedUser]: this.getAverageOfValues(sortedObjectKeys[rankedUser])
       };
-      return rankedUser;
     });
   }
 }
