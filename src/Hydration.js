@@ -2,11 +2,17 @@ class Hydration {
   constructor(hydrationData) {
     this.hydrationData = hydrationData;
   }
+
+  getAverageOfValues(data) {
+    return data.reduce((total, value) => {
+      total += value.numOunces;
+      return total;
+    }, 0) / data.length;
+  }
+
   calculateAverageOunces(id) {
     let perDayUserHydration = this.hydrationData.filter((data) => id === data.userID);
-    return perDayUserHydration.reduce((sumSoFar, data) => {
-      return sumSoFar += data.numOunces;
-    }, 0) / perDayUserHydration.length;
+    return this.getAverageOfValues(perDayUserHydration);
   }
   calculateDailyOunces(id, date) {
     let findOuncesByDate = this.hydrationData.find((data) => id === data.userID && date === data.date);
