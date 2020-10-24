@@ -154,6 +154,11 @@ describe('Hydration', function() {
   });
 
   it('should find water intake by day for first week', function() {
+    const firstWeek = userRepo.getFirstWeek(1, hydrationData);
+    expect(hydration.getOuncesPerDay(firstWeek)[0]).to.deep.eql('2019/06/15: 37');
+  });
+
+  it('should find water intake by day for first week', function() {
     expect(hydration.calculateFirstWeekOunces(userRepo, 4)[0]).to.eql('2019/09/20: 40');
   });
 
