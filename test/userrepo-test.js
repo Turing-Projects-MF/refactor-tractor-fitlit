@@ -456,6 +456,9 @@ describe('User Repo', function() {
 
       expect(userRepo.getFirstWeek(4, hydrationData)[3].date).to.eql("2019/09/17");
     });
+    it('should get a date index', function() {
+      expect(userRepo.getDateIndex('2019/06/15', 1, hydrationData)).to.eql(0);
+    });
     it('should get a sorted week of data for a single user from a date', function() {
       expect(userRepo.getWeekFromDate('2019/09/17', 4, hydrationData)[3].date).to.eql("2019/04/15");
     });
@@ -495,7 +498,12 @@ describe('User Repo', function() {
 
       expect(getHydrationDataByUserId).to.eql({
         '3': [1]
-      })
+      });
+    });
+    it('should get average data of the provided data', function() {
+      const values = [3.5, 4, 3.3, 3.6, 3.6, 4, 3.1];
+
+      expect(userRepo.getAverageOfValues(values).toFixed(2)).to.eql('3.59')
     });
     it('should rank user ids according to relevant data value averages', function() {
       expect(userRepo.rankUserIDsbyRelevantDataValue(sleepData, "2019/06/21", 'sleepQuality', userRepo.chooseWeekDataForAllUsers(sleepData, "2019/06/21"))).to.eql(['5', '2', '4'])
@@ -505,6 +513,5 @@ describe('User Repo', function() {
         '5': 4
       })
     });
-
   });
 });
