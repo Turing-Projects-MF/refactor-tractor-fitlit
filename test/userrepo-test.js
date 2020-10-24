@@ -3,6 +3,8 @@ import { expect } from 'chai';
 import UserRepo from '../src/User-repo';
 import User from '../src/User';
 
+// const hydrationDataInfo = require('../data/hydration.js');
+// const hydrationDataSet = hydrationDataInfo.hydrationData;
 
 describe('User Repo', function() {
   let user1;
@@ -34,56 +36,31 @@ describe('User Repo', function() {
   });
 
   it('should be a function', function() {
-    //const userRepo = new UserRepo();
-
     expect(UserRepo).to.be.a('function');
   });
 
-  it('takes an array of user data', function() {
+  it('should be an instance of UserRepo', function() {
+    expect(userRepo).to.be.an.instanceOf(UserRepo);
+  });
 
+  it('takes an array of user data', function() {
     expect(userRepo.users).to.include(user2);
   });
 
   it('should have a parameter to take in user data', function() {
-    const user1 = new User({
-      id: 1,
-      name: "Alex Roth",
-      address: "1234 Turing Street, Denver CO 80301-1697",
-      email: "alex.roth1@hotmail.com",
-      strideLength: 4.3,
-      dailyStepGoal: 10000,
-      friends: [2, 3, 4]
-    });
-    const users = [user1];
-    const userRepo = new UserRepo(users);
-
-    console.log('here: ', userRepo.users[0]);
-
     expect(userRepo.users[0].id).to.equal(1);
   });
 
   it('should return user data when given user ID', function() {
-
-
-    userRepo.getDataFromID(1);
-
     expect(userRepo.getDataFromID(1)).to.eql(user1);
   });
 
   it('should return the average of all users step goals', function() {
-
-
-    userRepo.calculateAverageStepGoal();
-
     expect(userRepo.calculateAverageStepGoal()).to.eql(9500);
   });
 
   describe('array changes', function() {
-    let user1;
-    let user2;
-    let user3;
-    let user4;
-    let user5;
+    let user1, user2, user3, user4, user5;
     let users;
     let userRepo;
     let hydrationData;
@@ -479,31 +456,54 @@ describe('User Repo', function() {
 
       expect(userRepo.getFirstWeek(4, hydrationData)[3].date).to.eql("2019/09/17");
     });
+    it('should get a date index', function() {
+      expect(userRepo.getDateIndex('2019/06/15', 1, hydrationData)).to.eql(0);
+    });
     it('should get a sorted week of data for a single user from a date', function() {
       expect(userRepo.getWeekFromDate('2019/09/17', 4, hydrationData)[3].date).to.eql("2019/04/15");
-      expect(userRepo.getWeekFromDate('2019/09/18', 4, hydrationData)[3].date).to.eql("2019/09/15");
     });
     it('should get a week of data for all users in data set', function() {
-      expect(userRepo.chooseWeekDataForAllUsers(hydrationData, '2019/09/17')[2].date).to.eql("2019/09/15");
-      expect(userRepo.chooseWeekDataForAllUsers(hydrationData, '2019/09/17')[2].userID).to.eql(4);
-      expect(userRepo.chooseWeekDataForAllUsers(hydrationData, '2019/09/17')[3].date).to.eql("2019/09/17");
-      expect(userRepo.chooseWeekDataForAllUsers(hydrationData, '2019/09/17')[3].userID).to.eql(3);
+      const weekHydrationData = userRepo.chooseWeekDataForAllUsers(hydrationData, '2019/09/17');
+
+      expect(weekHydrationData[2].date).to.eql("2019/09/15");
+      expect(weekHydrationData[2].userID).to.eql(4);
     });
     it('should get a day of data for all users in data set', function() {
-      expect(userRepo.chooseDayDataForAllUsers(sleepData, '2019/06/15')[0].date).to.eql('2019/06/15');
-      expect(userRepo.chooseDayDataForAllUsers(sleepData, '2019/06/15')[0].hoursSlept).to.eql(9);
-      expect(userRepo.chooseDayDataForAllUsers(sleepData, '2019/06/15')[2].date).to.eql('2019/06/15');
-      expect(userRepo.chooseDayDataForAllUsers(sleepData, '2019/06/15')[2].userID).to.eql(5);
+      const dayUserData = userRepo.chooseDayDataForAllUsers(sleepData, '2019/06/15');
+
+      expect(dayUserData[2].date).to.eql('2019/06/15');
+      expect(dayUserData[2].userID).to.eql(5);
     });
-    it('should isolate a user ID and its values of any relevant data', function() {
-      expect(userRepo.isolateUsernameAndRelevantData(sleepData, "2019/06/21", 'sleepQuality', userRepo.chooseWeekDataForAllUsers(sleepData, "2019/06/21"))).to.eql({
+    it('should isolate a user ID and its values of sleep data', function() {
+      const getSleepDataByUserId = userRepo.isolateUsernameAndRelevantData(
+        sleepData,
+        "2019/06/21",
+        'sleepQuality',
+        userRepo.chooseWeekDataForAllUsers(sleepData, "2019/06/21")
+      );
+
+      expect(getSleepDataByUserId).to.eql({
         '2': [3.5, 4, 3.3, 3.6, 3.6, 4, 3.1],
         '4': [3.5, 4, 1.3, 1.6, 1.6, 1, 3.1],
         '5': [4, 4, 4, 4, 4, 4, 4]
       })
-      expect(userRepo.isolateUsernameAndRelevantData(hydrationData, "2019/05/09", 'numOunces', userRepo.chooseWeekDataForAllUsers(hydrationData, "2019/05/09"))).to.eql({
+    });
+    it('should isolate a user ID and its values of hydration data', function() {
+      const getHydrationDataByUserId = userRepo.isolateUsernameAndRelevantData(
+        hydrationData,
+        "2019/05/09",
+        'numOunces',
+        userRepo.chooseWeekDataForAllUsers(hydrationData, "2019/05/09")
+      );
+
+      expect(getHydrationDataByUserId).to.eql({
         '3': [1]
-      })
+      });
+    });
+    it('should get average data of the provided data', function() {
+      const values = [3.5, 4, 3.3, 3.6, 3.6, 4, 3.1];
+
+      expect(userRepo.getAverageOfValues(values).toFixed(2)).to.eql('3.59')
     });
     it('should rank user ids according to relevant data value averages', function() {
       expect(userRepo.rankUserIDsbyRelevantDataValue(sleepData, "2019/06/21", 'sleepQuality', userRepo.chooseWeekDataForAllUsers(sleepData, "2019/06/21"))).to.eql(['5', '2', '4'])
@@ -513,6 +513,5 @@ describe('User Repo', function() {
         '5': 4
       })
     });
-
   });
 });
