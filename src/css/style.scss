@@ -1,3 +1,5 @@
+@import "variables";
+
 * {
   margin: 0;
 }
@@ -5,13 +7,13 @@
 body {
   font-family: 'Open Sans';
   margin: 0;
-  background-color: #4d4e4f;
+  background-color: $colorPrimary;
   height: auto;
 }
 
 h1 {
   text-align: center;
-  color: #ffffff;
+  color: $colorHeading;
   height: 80px;
   padding-top: 10px;
 }
@@ -31,7 +33,7 @@ h1 {
 
 .body-sidebar-sidebarContainer {
   background-color: #9A9DAB;
-  border: 1px solid black;
+  border: $sizeBorder solid $colorBorder;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -47,23 +49,23 @@ h1 {
   font-family: sans-serif;
   font-weight: bold;
   font-size: 1.2em;
-  margin: .5em .5em .5em .5em;
+  margin: $marginPrimary;
   width: inherit;
 }
 
 .sidebar-header-line {
-  color: #ffffff;
-  border: 1px solid black;
+  color: $colorHeading;
+  border: $sizeBorder solid $colorBorder;
   margin: 1em 1em 0 1em;
   height: 0;
-  width: 80%;
+  width: $cardTodayWidth;
 }
 
 .sidebar-header-userImage {
-  border-radius: 50%;
-  border-color: black;
+  border-radius: $cardHistoryWidth;
+  border-color: $colorBorder;
   border-style: solid;
-  border-width: 1px;
+  border-width: $sizeBorder;
   height: 200px;
   width: 200px;
   margin: 4px 2px 2px 2px;
@@ -80,8 +82,8 @@ h1 {
 }
 
 .body-main-infoContainter {
-  width: 100%;
-  border: 1px solid black;
+  width: $fullWidth;
+  border: $sizeBorder solid $colorBorder;
   margin: 0 0 1em;
   display: flex;
   flex-direction: column;
@@ -97,7 +99,7 @@ h1 {
 .main-column-activity {
   display: flex;
   flex-direction: row;
-  height: 50%
+  height: $cardHistoryWidth
 }
 
 .main-column-sleep {
@@ -107,13 +109,13 @@ h1 {
 }
 
 .infoContainer-cardContainer-card-horizontal {
-  width: 100%;
-  background-color: white;
-  border: 1px solid black;
+  width: $fullWidth;
+  background-color: $colorHeading;
+  border: $sizeBorder solid $colorBorder;
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin: 1%;
+  margin: $infoContainerMargin;
   justify-content: space-between;
 }
 
@@ -121,51 +123,51 @@ h1 {
   display: flex;
   flex-direction: row;
   justify-content: space-around;
-  width: 100%;
+  width: $fullWidth;
   overflow: scroll;
 }
 
 .infoContainer-cardContainer-card-vertical {
-  width: 100%;
-  background-color: white;
-  border: 1px solid black;
+  width: $fullWidth;
+  background-color: $colorHeading;
+  border: $sizeBorder solid $colorBorder;
   display: flex;
   flex-direction: row;
-  margin: 1%;
+  margin: $infoContainerMargin;
   overflow: scroll;
 }
 
 .card-today-hydration {
   text-align: center;
-  background-color: #5BC8AC;
+  background-color: $colorHydration;
   height: auto;
-  font-size: 1.5em;
-  margin: .5em;
+  font-size: $fontSizePrimary;
+  margin: $marginPrimary;
   font-family: sans-serif;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  width: 80%;
+  width: $cardTodayWidth;
 }
 
 .card-today-sleep {
   text-align: center;
-  background-color: #EC96A4;
+  background-color: $colorSleep;
   height: auto;
-  font-size: 1.5em;
-  margin: .5em;
+  font-size: $fontSizePrimary;
+  margin: $marginPrimary;
   font-family: sans-serif;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  width: 80%;
+  width: $cardTodayWidth;
 }
 
 .card-today-activity {
   text-align: center;
-  background-color: #DFE166;
+  background-color: $colorActivity;
   height: auto;
-  font-size: 1.5em;
+  font-size: $fontSizePrimary;
   margin: .3em;
   font-family: sans-serif;
   display: flex;
@@ -176,38 +178,38 @@ h1 {
 
 .card-history-hydration {
   text-align: center;
-  background-color: #5BC8AC;
-  font-size: 1em;
-  margin: .5em;
+  background-color: $colorHydration;
+  font-size: $fontSizeSecondary;
+  margin: $marginPrimary;
   font-family: sans-serif;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  width: 50%;
+  width: $cardHistoryWidth;
 }
 
 .card-history-sleep {
   text-align: center;
-  background-color: #EC96A4;
-  font-size: 1em;
-  margin: .5em;
+  background-color: $colorSleep;
+  font-size: $fontSizeSecondary;
+  margin: $marginPrimary;
   font-family: sans-serif;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  width: 50%;
+  width: $cardHistoryWidth;
 }
 
 .card-history-activity {
   text-align: center;
-  background-color: #DFE166;
-  font-size: 1em;
-  margin: .5em;
+  background-color: $colorSleep;
+  font-size: $fontSizeSecondary;
+  margin: $marginPrimary;
   font-family: sans-serif;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  width: 50%;
+  width: $cardHistoryWidth;
   height: 93%;
   overflow: scroll;
 }
@@ -215,24 +217,24 @@ h1 {
 .number {
   font-size: 2em;
   font-weight: bolder;
-  color: #4d4e4f;
+  color: $colorPrimary;
   font-kerning: normal;
 }
 
 .historicalWeek {
   text-align: center;
-  font-size: 1em;
+  font-size: $fontSizeSecondary;
   font-weight: bolder;
-  margin: .5em;
-  color: black;
+  margin: $marginPrimary;
+  color: $colorBorder;
 }
 
 .thisWeek {
   text-align: center;
-  font-size: 1em;
+  font-size: $fontSizeSecondary;
   font-weight: bolder;
-  margin: .5em;
-  color: black;
+  margin: $marginPrimary;
+  color: $colorBorder;
 }
 
 .card-vertical-list {
@@ -240,7 +242,7 @@ h1 {
   font-weight: lighter;
   font-style: italic;
   padding-left: 0;
-  font-size: 1em;
+  font-size: $fontSizeSecondary;
 }
 
 .historical-list-listItem {
