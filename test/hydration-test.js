@@ -103,6 +103,10 @@ describe('Hydration', function() {
     hydration = new Hydration(hydrationData);
   });
 
+  it('should only take in an array', function() {
+    expect(hydrationData).to.be.instanceof(Array);
+  });
+
   it('should take in a list of data', function() {
     expect(hydration.hydrationData[0].userID).to.equal(1);
     expect(hydration.hydrationData[2].numOunces).to.equal(1);
@@ -145,7 +149,7 @@ describe('Hydration', function() {
     expect(hydration.calculateFirstWeekOunces(userRepo, 4)[6]).to.eql('2019/04/15: 36');
   });
 
-  it('should find sleep quality by day for that days week', function() {
+  it('should calculate random week ounces for a user', function() {
     const user3 = new User({
       id: 3,
       name: "The Rock",
@@ -167,7 +171,7 @@ describe('Hydration', function() {
     });
     const users = [user3, user4];
     const userRepo = new UserRepo(users);
-    console.log("HELOOO", hydration.calculateRandomWeekOunces('2018/02/01', 4, userRepo));
+    hydration.calculateRandomWeekOunces('2018/02/01', 4, userRepo);
     expect(hydration.calculateRandomWeekOunces('2019/09/18', 4, userRepo)[0]).to.eql('2019/09/18: 40');
     // expect(hydration.calculateRandomWeekOunces('2018/02/01', 4, userRepo)[6]).to.eql('2019/09/16: 30');
     //this is failing because it doesn't exist, need a failure case
