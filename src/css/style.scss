@@ -58,7 +58,7 @@ h1 {
   border: $sizeBorder solid $colorBorder;
   margin: 1em 1em 0 1em;
   height: 0;
-  width: $cardTodayWidth;
+  width: $cardHistoryWidth;
 }
 
 .sidebar-header-userImage {
@@ -147,7 +147,7 @@ h1 {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  width: $cardTodayWidth;
+  width: $cardHistoryWidth;
 }
 
 .card-today-sleep {
@@ -160,7 +160,7 @@ h1 {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  width: $cardTodayWidth;
+  width: $cardHistoryWidth;
 }
 
 .card-today-activity {
