@@ -235,7 +235,6 @@ describe('Sleep', function() {
       }
     ];
 
-
     sleep = new Sleep(sleepData);
     user1 = new User({
       id: 1,
@@ -300,6 +299,20 @@ describe('Sleep', function() {
     userRepo = new UserRepo(users);
   });
 
+  it('should get average data of the provided data', function() {
+    expect(sleep.getAverageOfValues(sleepData, "hoursSlept").toFixed(2)).to.eql('7.23');
+  });
+
+  it('should filter sleep data by date', function() {
+    expect(sleep.filterSleepDataPerDay(1)).to.deep.eql([
+      { userID: 1, date: '2017/06/15', hoursSlept: 6.1, sleepQuality: 2.2 },
+      { userID: 1, date: '2018/07/15', hoursSlept: 4.1, sleepQuality: 3.6 },
+      { userID: 1, date: '2019/05/30', hoursSlept: 8.9, sleepQuality: 2.2 },
+      { userID: 1, date: '2019/08/22', hoursSlept: 10.1, sleepQuality: 1.8
+      }
+    ]);
+  });
+
   it('should take in a list of data', function() {
     expect(sleep.sleepData[0]).to.deep.equal({
         "userID": 1,
@@ -311,6 +324,15 @@ describe('Sleep', function() {
 
   it('should find the average sleep hours per day for a user', function() {
     expect(sleep.calculateAverageSleep(3)).to.equal(3);
+  });
+
+  it('should find sleep data by date', function() {
+    expect(sleep.findSleepDataByDate(1, "2017/06/15")).to.deep.equal({
+        "userID": 1,
+        "date": "2017/06/15",
+        "hoursSlept": 6.1,
+        "sleepQuality": 2.2
+      });
   });
 
   it('should find the average sleep quality per day for a user', function() {
@@ -333,12 +355,47 @@ describe('Sleep', function() {
     expect(sleep.calculateWeekSleepQuality('2019/06/18', 4, userRepo)[0]).to.eql('2019/06/18: 1.6');
   })
 
+  it('should calculate all users sleep quality', function() {
+    expect(sleep.calculateAllUserSleepQuality().toFixed(2)).to.eql("2.98");
+  })
+
+  it('should return user names', function() {
+    let sleepyObject = {
+      '2': [
+        3.5, 4, 3.3, 3.6,
+        3.6, 4, 3.1
+      ],
+      '4': [
+        3.5, 4, 1.3, 1.6,
+        1.6, 1, 3.1
+      ],
+      '5': [
+        4, 4, 4, 4,
+        4, 4, 4
+      ]
+    }
+    expect(sleep.getUserNames(sleepyObject, userRepo)).to.deep.eql([ 'Allie McCarthy', 'Bugs Bunny' ]);
+  })
+
+  it('should get a users sleep data', function() {
+    expect(sleep.getUserSleepObject("2019/06/21", userRepo, "sleepQuality")).to.deep.eql([
+       {
+         "5": 4
+       },
+       {
+         "2": 3.585714285714286
+       },
+       {
+         "4": 2.3000000000000003
+       }]);
+  })
+
   it('should determine the best quality sleepers for a week', function() {
     expect(sleep.determineBestSleepers("2019/06/21", userRepo)).to.eql(["Allie McCarthy", "Bugs Bunny"]);
   })
 
   it('should return person with best quality sleep for the week', function() {
-    expect(sleep.determineSleepWinnerForWeek("2019/06/21", userRepo)).to.eql(["Bugs Bunny"]);
+    expect(sleep.determineSleepWinnerForWeek("2019/06/21", userRepo)).to.deep.eql(["Bugs Bunny"]);
   })
 
   it('should return all qualifying users if best quality sleep is a tie', function() {
@@ -362,7 +419,30 @@ describe('Sleep', function() {
       "hoursSlept": 9,
       "sleepQuality": 4
     })
-    expect(sleep.determineSleepHoursWinnerForDay('2019/06/21', userRepo)).to.eql(["Bugs Bunny", "Richmond"]);
+    expect(sleep.determineSleepHoursWinnerForDay('2019/06/21', userRepo)).to.deep.eql(["Bugs Bunny", "Richmond"]);
   })
   //make this test fail when user is NOT best in week
+
+  it('should return the best sleepers', function() {
+    let sortedArray = [
+      { '5': 9 },
+      { '6': 9 },
+      { '2': 7.614285714285714 },
+      { '4': 7.614285714285714 }
+    ]
+    expect(sleep.getBestResults(sortedArray)).to.deep.equal([{ '5': 9 }, { '6': 9 }]);
+  })
+
+  it('should return best sleeper id', function() {
+    let bestSleepers = [{ '5': 9 }, { '6': 9 }];
+    expect(sleep.getSleepersIds(bestSleepers)).to.deep.equal([["5"], ["6"]]);
+  })
+
+  it('should return best sleeper names', function() {
+    let sortedArray = [
+      { '5': 9 },
+      { '6': 9 }
+    ]
+    expect(sleep.getWinnerNamesFromList(sortedArray, userRepo)).to.deep.equal(["Bugs Bunny", "Richmond"]);
+  })
 });
