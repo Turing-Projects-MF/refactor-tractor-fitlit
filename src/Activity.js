@@ -9,7 +9,7 @@ class Activity {
 
   getMilesFromStepsByDate(id, date, userRepo) {
     let userStepsByDate = this.getUserInfoByDateAndId(id, date);
-    return parseFloat(((userStepsByDate.numSteps * userRepo.strideLength) / 5280).toFixed(1));
+    return parseFloat(((userStepsByDate.numSteps * userRepo.strideLength) / 5280).toFixed(0));
   }
 
   getActiveMinutesByDate(id, date) {
@@ -20,7 +20,7 @@ class Activity {
   calculateActiveAverageForWeek(id, date, userRepo) {
     return parseFloat((userRepo.getWeekFromDate(date, id, this.activityData).reduce((acc, elem) => {
       return acc += elem.minutesActive;
-    }, 0) / 7).toFixed(1));
+    }, 0) / 7).toFixed(0));
   }
 
   accomplishStepGoal(id, date, userRepo) {
@@ -42,7 +42,7 @@ class Activity {
 
   getAllUserAverageForDay(date, userRepo, relevantData) {
     let selectedDayData = userRepo.chooseDayDataForAllUsers(this.activityData, date);
-    return parseFloat((selectedDayData.reduce((acc, elem) => acc += elem[relevantData], 0) / selectedDayData.length).toFixed(1));
+    return parseFloat((selectedDayData.reduce((acc, elem) => acc += elem[relevantData], 0) / selectedDayData.length).toFixed(0));
   }
 
   userDataForToday(id, date, userRepo, relevantData) {
@@ -81,7 +81,7 @@ class Activity {
     return rankedList.map(stepsById => {
       let userID = Object.keys(stepsById)[0];
       let userName = userRepo.getDataFromID(parseInt(userID)).name;
-      return `${userName}: ${stepsById[userID]}`
+      return `${userName}: ${stepsById[userID].toFixed(0)}`
     });
   }
 

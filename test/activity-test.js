@@ -221,7 +221,7 @@ describe('Activity', function() {
   });
 
   it('should return the miles a given user has walked on a given date', function() {
-    expect(activity.getMilesFromStepsByDate(1, "2019/06/15", userRepo.users[0])).to.eql(2.9);
+    expect(activity.getMilesFromStepsByDate(1, "2019/06/15", userRepo.users[0])).to.eql(3);
   });
 
   it('should return the number of minutes a given user was active for on a given day', function() {
@@ -229,7 +229,7 @@ describe('Activity', function() {
   });
 
   it('should return average active minutes in a given week', function() {
-    expect(activity.calculateActiveAverageForWeek(1, "2019/06/21", userRepo)).to.eql(40.4);
+    expect(activity.calculateActiveAverageForWeek(1, "2019/06/21", userRepo)).to.eql(40);
   });
 
   it('should return true/false if the given user met their step goal on a given day', function() {
@@ -252,7 +252,7 @@ describe('Activity', function() {
   });
 
   it('should return the average flight of stairs for all users on given day', function() {
-    expect(activity.getAllUserAverageForDay("2019/06/15", userRepo, "flightsOfStairs")).to.eql(21.2)
+    expect(activity.getAllUserAverageForDay("2019/06/15", userRepo, "flightsOfStairs")).to.eql(21)
   })
 
   it('should return average steps taken for given date for all users', function() {
@@ -603,7 +603,7 @@ describe('Friend Activity', function() {
 
   it('should get a users ranked friendslist activity for a chosen week with names', function() {
     expect(activity.showChallengeListAndWinner(user4, "2019/06/15", userRepo)).to.eql([
-      'Allie McCarthy: 9552', 'Alex Roth: 7475.5'
+      'Allie McCarthy: 9552', 'Alex Roth: 7476' 
     ])
   });
 
