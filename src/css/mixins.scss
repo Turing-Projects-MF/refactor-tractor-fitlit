@@ -1,0 +1,59 @@
+@import "variables";
+
+@mixin flex-row {
+  display: flex;
+  flex-direction: row;
+}
+@mixin flex-column {
+  display: flex;
+  flex-direction: column;
+}
+
+@mixin sidebar-border {
+  border: {
+    width: $sizeBorder;
+    style: solid;
+    color: $colorBorder;
+  }
+}
+
+@mixin sidebar-border-userImage {
+  @include sidebar-border;
+  border-radius: $cardHistoryWidth;
+}
+
+@mixin cards {
+  text-align: center;
+  font-family: sans-serif;
+  @include flex-column;
+}
+
+@mixin today-cards {
+  @include cards;
+  height: auto;
+  justify-content: space-between;
+  font-size: $fontSizePrimary;
+}
+
+@mixin history-cards {
+  @include cards;
+  width: $cardHistoryWidth;
+  justify-content: flex-start;
+  font-size: $fontSizeSecondary;
+  margin: $marginPrimary;
+}
+
+@mixin infocontainer-cardContainer {
+  width: $fullWidth;
+  background-color: $colorHeading;
+  border: $sizeBorder solid $colorBorder;
+  margin: $infoContainerMargin;
+}
+
+@mixin week-data {
+  text-align: center;
+  font-size: $fontSizeSecondary;
+  font-weight: bolder;
+  margin: $marginPrimary;
+  color: $colorBorder;
+}
