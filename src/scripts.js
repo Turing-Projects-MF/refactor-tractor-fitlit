@@ -8,10 +8,6 @@ let userData;
 let hydrationData;
 let sleepData;
 let activityData;
-// import userData from './data/users';
-// import hydrationData from './data/hydration';
-// import sleepData from './data/sleep';
-// import activityData from './data/activity';
 
 import User from './User';
 import Activity from './Activity';
@@ -240,5 +236,3 @@ function makeFriendChallengeHTML(method) {
 function makeStepStreakHTML(method) {
   return method.map(streakData => `<li class="historical-list-listItem">${streakData}!</li>`).join('');
 }
-
-// startApp();
