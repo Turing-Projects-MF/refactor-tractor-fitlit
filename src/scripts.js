@@ -163,13 +163,13 @@ function addWeeklyStepInfo(id, activityInfo, dateString, userStorage, laterDateS
   $('#bestUserSteps').prepend(makeStepsHTML(user, activityInfo, userStorage, activityInfo.userDataForWeek(winnerId, dateString, userStorage, "numSteps")))
 }
 
-function addUserTodayStepDetails(id, activityInfo, dateString, userStorage, laterDateString, user, winnerId) {
+function addUserTodayStepDetails(id, activityInfo, dateString, userStorage) {
   $('#userStairsToday').prepend(`<p>Stair Count:</p><p>You</><p><span class="number">${activityInfo.userDataForToday(id, dateString, userStorage, 'flightsOfStairs')}</span></p>`)
   $('#userStepsToday').prepend(`<p>Step Count:</p><p>You</p><p><span class="number">${activityInfo.userDataForToday(id, dateString, userStorage, 'numSteps')}</span></p>`)
   $('#userMinutesToday').prepend(`<p>Active Minutes:</p><p>You</p><p><span class="number">${activityInfo.userDataForToday(id, dateString, userStorage, 'minutesActive')}</span></p>`)
 }
 
-function addUserAvgStepDetails(id, activityInfo, dateString, userStorage, laterDateString, user, winnerId) {
+function addUserAvgStepDetails(id, activityInfo, dateString, userStorage) {
   $('#avgStairsToday').prepend(`<p>Stair Count: </p><p>All Users</p><p><span class="number">${activityInfo.getAllUserAverageForDay(dateString, userStorage, 'flightsOfStairs')}</span></p>`)
   $('#avgStepsToday').prepend(`<p>Step Count:</p><p>All Users</p><p><span class="number">${activityInfo.getAllUserAverageForDay(dateString, userStorage, 'numSteps')}</span></p>`)
   $('#avgMinutesToday').prepend(`<p>Active Minutes:</p><p>All Users</p><p><span class="number">${activityInfo.getAllUserAverageForDay(dateString, userStorage, 'minutesActive')}</span></p>`)
@@ -188,18 +188,18 @@ function makeMinutesHTML(id, activityInfo, userStorage, method) {
 }
 
 function addFriendGameInfo(id, activityInfo, userStorage, dateString, laterDateString, user) {
-  $('#friendChallengeListToday').prepend(makeFriendChallengeHTML(id, activityInfo, userStorage, activityInfo.showChallengeListAndWinner(user, dateString, userStorage)));
-  $('#streakList').prepend(makeStepStreakHTML(id, activityInfo, userStorage, activityInfo.getStreak(userStorage, id, 'numSteps')));
-  $('#streakListMinutes').prepend(makeStepStreakHTML(id, activityInfo, userStorage, activityInfo.getStreak(userStorage, id, 'minutesActive')));
-  $('#friendChallengeListHistory').prepend(makeFriendChallengeHTML(id, activityInfo, userStorage, activityInfo.showChallengeListAndWinner(user, dateString, userStorage)));
+  $('#friendChallengeListToday').prepend(makeFriendChallengeHTML(activityInfo.showChallengeListAndWinner(user, dateString, userStorage)));
+  $('#streakList').prepend(makeStepStreakHTML(activityInfo.getStreak(userStorage, id, 'numSteps')));
+  $('#streakListMinutes').prepend(makeStepStreakHTML(activityInfo.getStreak(userStorage, id, 'minutesActive')));
+  $('#friendChallengeListHistory').prepend(makeFriendChallengeHTML(activityInfo.showChallengeListAndWinner(user, dateString, userStorage)));
   $('#bigWinner').prepend(`THIS WEEK'S WINNER! ${activityInfo.showcaseWinner(user, dateString, userStorage)} steps`);
 }
 
-function makeFriendChallengeHTML(id, activityInfo, userStorage, method) {
+function makeFriendChallengeHTML(method) {
   return method.map(friendChallengeData => `<li class="historical-list-listItem">Your friend ${friendChallengeData} average steps.</li>`).join('');
 }
 
-function makeStepStreakHTML(id, activityInfo, userStorage, method) {
+function makeStepStreakHTML(method) {
   return method.map(streakData => `<li class="historical-list-listItem">${streakData}!</li>`).join('');
 }
 
