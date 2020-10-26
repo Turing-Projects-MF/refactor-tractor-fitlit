@@ -4,10 +4,14 @@ import './css/style.scss';
 import './images/person walking on path.jpg';
 import './images/The Rock.jpg';
 
-import userData from './data/users';
-import hydrationData from './data/hydration';
-import sleepData from './data/sleep';
-import activityData from './data/activity';
+let userData;
+let hydrationData;
+let sleepData;
+let activityData;
+// import userData from './data/users';
+// import hydrationData from './data/hydration';
+// import sleepData from './data/sleep';
+// import activityData from './data/activity';
 
 import User from './User';
 import Activity from './Activity';
@@ -20,6 +24,39 @@ let userRepo;
 let hydrationRepo;
 let sleepRepo;
 let activityRepo;
+
+const fetchedUserData = fetch('https://fe-apps.herokuapp.com/api/v1/fitlit/1908/users/userData')
+  .then(response => response.json())
+  .then(data => data.userData)
+  .catch(error => console.log(error));
+
+const fetchedSleepData = fetch('https://fe-apps.herokuapp.com/api/v1/fitlit/1908/sleep/sleepData')
+  .then(response => response.json())
+  .then(data => data.sleepData)
+  .catch(error => console.log(error));
+
+const fetchedActivityData = fetch('https://fe-apps.herokuapp.com/api/v1/fitlit/1908/activity/activityData')
+  .then(response => response.json())
+  .then(data => data.activityData)
+  .catch(error => console.log(error));
+
+const fetchedHydrationData = fetch('https://fe-apps.herokuapp.com/api/v1/fitlit/1908/hydration/hydrationData')
+  .then(response => response.json())
+  .then(data => data.hydrationData)
+  .catch(error => console.log(error));
+
+
+Promise.all([fetchedUserData, fetchedSleepData, fetchedActivityData, fetchedHydrationData])
+  .then(value => {
+    userData = value[0];
+    sleepData = value[1];
+    activityData = value[2];
+    hydrationData = value[3];
+    startApp()
+  })
+  .catch(error => console.log(error))
+
+
 
 function startApp() {
   createUserRepo();
@@ -63,7 +100,8 @@ function createUserData() {
 }
 
 function makeUsers(array) {
-  userData.forEach(function(dataItem) {
+  console.log(userData);
+  userData.forEach(dataItem => {
     let user = new User(dataItem);
     array.push(user);
   })
@@ -203,4 +241,4 @@ function makeStepStreakHTML(method) {
   return method.map(streakData => `<li class="historical-list-listItem">${streakData}!</li>`).join('');
 }
 
-startApp();
+// startApp();
