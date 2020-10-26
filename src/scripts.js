@@ -55,18 +55,26 @@ let activityRepo;
 function startApp() {
   createUserRepo();
   createUserData();
-  const userNowId = pickUser();
+  let userNowId = pickUser();
   let userNow = getUserById(userNowId, userRepo);
   let today = makeToday(userRepo, userNowId, hydrationData);
+  //today = 2019/09/22
   let randomHistory = makeRandomDate(userRepo, userNowId, hydrationData);
   displayRandomUserHistory(randomHistory);
+  generateInitialInfo(userNowId, activityRepo, userRepo, today, randomHistory, userNow);
+  generateActivityInfo(userNowId, activityRepo, today, userRepo, randomHistory, userNow);
+}
 
+function generateInitialInfo(userNowId, activityRepo, userRepo, today, randomHistory, userNow) {
   addInfoToSidebar(userNow, userRepo);
-  addHydrationInfo(userNowId, hydrationRepo, today, userRepo, randomHistory);
-  addSleepInfo(userNowId, sleepRepo, today, userRepo, randomHistory);
+  addFriendGameInfo(userNowId, activityRepo, userRepo, today, randomHistory, userNow);
+}
+
+function generateActivityInfo(userNowId, activityRepo, today, userRepo, randomHistory, userNow) {
   let winnerNow = makeWinnerID(activityRepo, userNow, today, userRepo);
   addActivityInfo(userNowId, activityRepo, today, userRepo, randomHistory, userNow, winnerNow);
-  addFriendGameInfo(userNowId, activityRepo, userRepo, today, randomHistory, userNow);
+  addHydrationInfo(userNowId, hydrationRepo, today, userRepo, randomHistory);
+  addSleepInfo(userNowId, sleepRepo, today, userRepo, randomHistory);
 }
 
 function displayRandomUserHistory(randomDay) {
@@ -102,28 +110,23 @@ function getUserById(id, listRepo) {
 
 
 function addInfoToSidebar(user, userStorage) {
+  displaySidebarDetails(user)
+  avStepGoalCard.innerText = `The average daily step goal is ${userStorage.calculateAverageStepGoal()}`;
+  displayUserSidebar(user, userStorage)
+}
+
+function displaySidebarDetails(user) {
   sidebarName.innerText = user.name;
   headerText.innerText = `${user.getFirstName()}'s Activity Tracker`;
   stepGoalCard.innerText = `Your daily step goal is ${user.dailyStepGoal}.`
-  avStepGoalCard.innerText = `The average daily step goal is ${userStorage.calculateAverageStepGoal()}`;
+}
+
+function displayUserSidebar(user, userStorage) {
   userAddress.innerText = user.address;
   userEmail.innerText = user.email;
   userStridelength.innerText = `Your stridelength is ${user.strideLength} meters.`;
   friendList.insertAdjacentHTML('afterBegin', makeFriendHTML(user, userStorage))
 }
-
-// function displaySidebarDetails(currentUser) {
-//   sidebarName.innerText = currentUser.name;
-//   headerText.innerText = `${currentUser.getFirstName()}'s Activity Tracker`;
-//   stepGoalCard.innerText = `Your daily step goal is ${currentUser.dailyStepGoal}.`;
-// }
-
-// function displayUserSidebar(currentUser, storage) {
-//   userAddress.innerText = currentUser.address;
-//   userEmail.innerText = currentUser.email;
-//   userStridelength.innerText = `Your stridelength is ${currentUser.strideLength} meters.`;
-//   friendList.insertAdjacentHTML('afterBegin', makeFriendHTML(currentUser, storage));
-// }
 
 function makeFriendHTML(user, userStorage) {
   return user.getFriendsNames(userStorage).map(friendName => `<li class='historical-list-listItem'>${friendName}</li>`).join('');
@@ -150,6 +153,7 @@ function addHydrationInfo(id, hydrationInfo, dateString, userStorage, laterDateS
   hydrationThisWeek.insertAdjacentHTML('afterBegin', makeHydrationHTML(id, hydrationInfo, userStorage, hydrationInfo.calculateFirstWeekOunces(userStorage, id)));
   hydrationEarlierWeek.insertAdjacentHTML('afterBegin', makeHydrationHTML(id, hydrationInfo, userStorage, hydrationInfo.calculateRandomWeekOunces(laterDateString, id, userStorage)));
 }
+
 
 function makeHydrationHTML(id, hydrationInfo, userStorage, method) {
   return method.map(drinkData => `<li class="historical-list-listItem">On ${drinkData}oz</li>`).join('');
