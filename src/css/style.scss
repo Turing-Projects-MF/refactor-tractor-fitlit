@@ -1,4 +1,5 @@
 @import "variables";
+@import "mixins";
 
 * {
   margin: 0;
@@ -9,207 +10,146 @@ body {
   margin: 0;
   background-color: $colorPrimary;
   height: auto;
-}
-
-h1 {
-  text-align: center;
-  color: $colorHeading;
-  height: 80px;
-  padding-top: 10px;
+  h1 {
+    text-align: center;
+    color: $colorHeading;
+    height: 80px;
+    padding-top: 10px;
+  }
 }
 
 .main {
-  display: flex;
-  flex-direction: row;
+  @include flex-row;
   height: 1500px;
-}
 
-.main-sidebar-body {
-  display: flex;
-  flex-direction: row;
-  width: 25%;
-  height: 100%;
+  .main-sidebar-body {
+    @include flex-row;
+    width: 25%;
+    height: 100%;
+  }
 }
 
 .body-sidebar-sidebarContainer {
-  background-color: #9A9DAB;
-  border: $sizeBorder solid $colorBorder;
-  display: flex;
-  flex-direction: column;
+  background-color: $colorSideBars;
+  @include sidebar-border;
+  @include flex-column;
   align-items: center;
   text-align: center;
   overflow: scroll;
-}
+  .sidebar-header-name {
+    text-align: center;
+  }
 
-.sidebar-header-name {
-  text-align: center;
-}
+  .sidebar-header-userInfo {
+    font-family: sans-serif;
+    font-weight: bold;
+    font-size: 1.2em;
+    margin: $marginPrimary;
+    width: inherit;
+  }
 
-.sidebar-header-userInfo {
-  font-family: sans-serif;
-  font-weight: bold;
-  font-size: 1.2em;
-  margin: $marginPrimary;
-  width: inherit;
-}
+  .sidebar-header-line {
+    color: $colorHeading;
+    @include sidebar-border;
+    margin: 1em 1em 0 1em;
+    height: 0;
+    width: $cardHistoryWidth;
+  }
 
-.sidebar-header-line {
-  color: $colorHeading;
-  border: $sizeBorder solid $colorBorder;
-  margin: 1em 1em 0 1em;
-  height: 0;
-  width: $cardHistoryWidth;
-}
+  .sidebar-header-userImage {
+    @include sidebar-border-userImage;
+    height: 200px;
+    width: 200px;
+    margin: 4px 2px 2px 2px;
+    justify-content: center;
+  }
 
-.sidebar-header-userImage {
-  border-radius: $cardHistoryWidth;
-  border-color: $colorBorder;
-  border-style: solid;
-  border-width: $sizeBorder;
-  height: 200px;
-  width: 200px;
-  margin: 4px 2px 2px 2px;
-  justify-content: center;
-}
+  .sidebar-body-friendContainer {
+    @include flex-column;
+  }
 
-.sidebar-body-friendContainer {
-  display: flex;
-  flex-direction: column;
-}
-
-.sidebar-friendContainer-listItems {
-  text-align: left;
+  .sidebar-friendContainer-listItems {
+    text-align: left;
+  }
 }
 
 .body-main-infoContainter {
   width: $fullWidth;
   border: $sizeBorder solid $colorBorder;
   margin: 0 0 1em;
-  display: flex;
-  flex-direction: column;
+  @include flex-column;
   overflow: scroll;
-}
+  .main-column-hydration {
+    @include flex-row;
+    height: 25%
+  }
 
-.main-column-hydration {
-  display: flex;
-  flex-direction: row;
-  height: 25%
-}
+  .main-column-activity {
+    @include flex-row;
+    height: $cardHistoryWidth
+  }
 
-.main-column-activity {
-  display: flex;
-  flex-direction: row;
-  height: $cardHistoryWidth
-}
-
-.main-column-sleep {
-  display: flex;
-  flex-direction: row;
-  height: 35%
+  .main-column-sleep {
+    @include flex-row;
+    height: 35%
+  }
 }
 
 .infoContainer-cardContainer-card-horizontal {
-  width: $fullWidth;
-  background-color: $colorHeading;
-  border: $sizeBorder solid $colorBorder;
-  display: flex;
-  flex-direction: column;
+  @include infocontainer-cardContainer;
+  @include flex-column;
   align-items: center;
-  margin: $infoContainerMargin;
   justify-content: space-between;
 }
 
 .horizontalCard-activity-container {
-  display: flex;
-  flex-direction: row;
+  @include flex-row;
   justify-content: space-around;
   width: $fullWidth;
   overflow: scroll;
 }
 
 .infoContainer-cardContainer-card-vertical {
-  width: $fullWidth;
-  background-color: $colorHeading;
-  border: $sizeBorder solid $colorBorder;
-  display: flex;
-  flex-direction: row;
-  margin: $infoContainerMargin;
+  @include flex-row;
+  @include infocontainer-cardContainer;
   overflow: scroll;
 }
 
 .card-today-hydration {
-  text-align: center;
+  @include today-cards;
+
   background-color: $colorHydration;
-  height: auto;
-  font-size: $fontSizePrimary;
   margin: $marginPrimary;
-  font-family: sans-serif;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
   width: $cardHistoryWidth;
 }
 
 .card-today-sleep {
-  text-align: center;
+  @include today-cards;
   background-color: $colorSleep;
-  height: auto;
-  font-size: $fontSizePrimary;
   margin: $marginPrimary;
-  font-family: sans-serif;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
   width: $cardHistoryWidth;
 }
 
 .card-today-activity {
-  text-align: center;
+  @include today-cards;
   background-color: $colorActivity;
-  height: auto;
-  font-size: $fontSizePrimary;
   margin: .3em;
-  font-family: sans-serif;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
   width: 40%;
 }
 
 .card-history-hydration {
-  text-align: center;
+  @include history-cards;
   background-color: $colorHydration;
-  font-size: $fontSizeSecondary;
-  margin: $marginPrimary;
-  font-family: sans-serif;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  width: $cardHistoryWidth;
 }
 
 .card-history-sleep {
-  text-align: center;
+  @include history-cards;
   background-color: $colorSleep;
-  font-size: $fontSizeSecondary;
-  margin: $marginPrimary;
-  font-family: sans-serif;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  width: $cardHistoryWidth;
 }
 
 .card-history-activity {
-  text-align: center;
+  @include history-cards;
   background-color: $colorSleep;
-  font-size: $fontSizeSecondary;
-  margin: $marginPrimary;
-  font-family: sans-serif;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  width: $cardHistoryWidth;
   height: 93%;
   overflow: scroll;
 }
@@ -222,19 +162,11 @@ h1 {
 }
 
 .historicalWeek {
-  text-align: center;
-  font-size: $fontSizeSecondary;
-  font-weight: bolder;
-  margin: $marginPrimary;
-  color: $colorBorder;
+  @include week-data;
 }
 
 .thisWeek {
-  text-align: center;
-  font-size: $fontSizeSecondary;
-  font-weight: bolder;
-  margin: $marginPrimary;
-  color: $colorBorder;
+  @include week-data;
 }
 
 .card-vertical-list {
