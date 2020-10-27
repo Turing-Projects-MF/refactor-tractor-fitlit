@@ -96,7 +96,6 @@ function createUserData() {
 }
 
 function makeUsers(array) {
-  console.log(userData);
   userData.forEach(dataItem => {
     let user = new User(dataItem);
     array.push(user);
