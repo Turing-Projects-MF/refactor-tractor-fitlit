@@ -8,10 +8,37 @@
 
 <body>
   <h1 id="headerText">Activity Tracker</h1>
+
+  <label class="user__inputs" id="activity__dropdown" for="userActivityLog">Choose an Activity to Log:</label>
+  <select aria-labelledby="activity__dropdown" name="userActivityLog" id="user__activities" onchange="">
+    <option value="Hydration">Hydration</option>
+    <option value="Sleep">Sleep</option>
+    <option value="Steps">Steps</option>
+  </select>
+
+  <form class="user__inputs hidden">
+    <label id="userSteps" for="userStepsInput">Number of Steps:</label><br>
+    <input aria-labelledby="userSteps" type="text" id="number__of__steps" name="userStepsInput"><br>
+    <label id="userActive" for="userStepsInput">Active Minutes:</label><br>
+    <input aria-labelledby="userActive" type="text" id="active__minutes" name="userStepsInput">
+    <label id="userStairs" for="userStepsInput">Flight of Stairs:</label><br>
+    <input aria-labelledby="userStairs" type="text" id="flights_stairs" name="userStepsInput">
+  </form>
+  <form class="user__inputs hidden">
+    <label id="userSleep" for="userSleepInput">Hours Slept:</label><br>
+    <input aria-labelledby="userSleep" type="text" id="hours__slept" name="userSleepInput"><br>
+    <label id="userSleepQuality" for="userSleepInput">Sleep Quality</label><br>
+    <input aria-labelledby="userSleepQuality" type="text" id="sleep__quality" name="userSleepInput">
+  </form>
+  <form class="user__inputs hidden">
+    <label id="userHydration" for="userHydrationInput">Total Ounces</label><br>
+    <input aria-labelledby="userHydration" type="text" id="total__water" name="userHydrationInput"><br>
+  </form>
+
   <main class="main">
-    <article class="main__sidebar__body" tabindex="1">
+    <article class="main__sidebar__body" tabindex="0">
       <section class="body__sidebar__sidebarContainer">
-        <h2 class="sidebar__header__name" id="sidebarName">Name Name</h2>
+        <h2 class="sidebar__header__name" id="sidebarName"></h2>
         <div class="sidebar__header__line"></div>
         <img src="./images/The Rock.jpg" class="sidebar__header__userImage" alt="The Rock headshot"></img>
         <div class="sidebar__header__line"></div>
@@ -41,7 +68,7 @@
     </article>
     <article class="body__main__infoContainter">
       <section class="main__column__hydration">
-        <section class="infoContainer__cardContainer__card__horizontal" tabindex="2">
+        <section class="infoContainer__cardContainer__card__horizontal" tabindex="0">
           <div class="card__today__hydration">
             <p id="hydrationToday"></p>
           </div>
@@ -50,14 +77,14 @@
           </div>
         </section>
         <section class="infoContainer__cardContainer__card__vertical">
-          <div class="card__history__hydration" tabindex="3">
+          <div class="card__history__hydration" tabindex="0">
             <p class="thisWeek">Water intake this week:</p>
             <div class="sidebar__header__line"></div>
             <ul class="card__vertical__list" id="hydrationThisWeek">
               <!-- <!____ Hydration week list goes here ____> -->
             </ul>
           </div>
-          <div class="card__history__hydration" tabindex="4">
+          <div class="card__history__hydration" tabindex="0">
             <p class="historicalWeek"></p>
             <div class="sidebar__header__line"></div>
             <ul class="card__vertical__list" id="hydrationEarlierWeek">
@@ -67,7 +94,7 @@
         </section>
       </section>
       <section class="main__column__activity">
-        <section class="infoContainer__cardContainer__card__horizontal" tabindex="5">
+        <section class="infoContainer__cardContainer__card__horizontal" tabindex="0">
           <section class="horizontalCard__activity__container">
             <div class="card__today__activity" >
               <p id="userStepsToday"></p>
@@ -95,14 +122,14 @@
         </section>
         <section class="infoContainer__cardContainer__card__horizontal">
           <section class="horizontalCard__activity__container">
-            <div class="card__history__activity" tabindex="6">
+            <div class="card__history__activity" tabindex="0">
               <p class="thisWeek">Your steps this week</p>
               <div class="sidebar__header__line"></div>
               <ul class="card__vertical__list" id="userStepsThisWeek">
                 <!-- <!____ Activity week list goes here ____> -->
               </ul>
             </div>
-            <div class="card__history__activity" tabindex="7">
+            <div class="card__history__activity" tabindex="0">
               <p class="thisWeek">Your stair count this week</p>
               <div class="sidebar__header__line"></div>
               <ul class="card__vertical__list" id="userStairsThisWeek">
@@ -111,14 +138,14 @@
             </div>
           </section>
           <section class="horizontalCard__activity__container">
-            <div class="card__history__activity" tabindex="8">
+            <div class="card__history__activity" tabindex="0">
               <p class="thisWeek">Your minutes of activity this week</p>
               <div class="sidebar__header__line"></div>
               <ul class="card__vertical__list" id="userMinutesThisWeek">
                 <!-- <!____ Activity week list goes here ____> -->
               </ul>
             </div>
-            <div class="card__history__activity" tabindex="9">
+            <div class="card__history__activity" tabindex="0">
               <p class="thisWeek">Winner's steps this week</p>
               <div class="sidebar__header__line"></div>
               <ul class="card__vertical__list" id="bestUserSteps">
@@ -129,7 +156,7 @@
         </section>
       </section>
       <section class="main__column__sleep">
-        <section class="infoContainer__cardContainer__card__horizontal" tabindex="10  ">
+        <section class="infoContainer__cardContainer__card__horizontal" tabindex="0">
           <div class="card__today__sleep">
             <p id="sleepToday"></p>
           </div>
@@ -141,14 +168,14 @@
           </div>
         </section>
         <section class="infoContainer__cardContainer__card__vertical">
-          <div class="card__history__sleep" tabindex="11">
+          <div class="card__history__sleep" tabindex="0">
             <p class="thisWeek">Hours of sleep this week</p>
             <div class="sidebar__header__line"></div>
             <ul class="card__vertical__list" id="sleepThisWeek">
               <!-- <!____ Sleep week list goes here ____> -->
             </ul>
           </div>
-          <div class="card__history__sleep" tabindex="12">
+          <div class="card__history__sleep" tabindex="0">
             <p class="historicalWeek"></p>
             <div class="sidebar__header__line"></div>
             <ul class="card__vertical__list" id="sleepEarlierWeek">
@@ -158,7 +185,7 @@
         </section>
       </section>
     </article>
-    <article class="main__sidebar__body" tabindex="13">
+    <article class="main__sidebar__body" tabindex="0">
       <section class="body__sidebar__sidebarContainer">
         <h2 class="sidebar__header__name" id="sidebarName">FRIENDLY STEP CHALLENGE!</h2>
         <div class="sidebar__header__line"></div>
