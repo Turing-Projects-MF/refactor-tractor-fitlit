@@ -184,9 +184,21 @@ body {
 }
 
 .user__inputs {
+  display: flex;
+  justify-content: space-between;
   color: $colorHeading;
+  margin-right: 10px;
 }
 
 .hidden {
   display: none;
+}
+
+.activity__user__log {
+  display: flex;
+  margin: 0 15px 10px 15px;
+}
+
+.user__labels {
+  margin: 0 15px 5px 15px;
 }
