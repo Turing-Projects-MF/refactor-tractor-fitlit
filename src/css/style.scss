@@ -10,69 +10,67 @@ body {
   margin: 0;
   background-color: $colorPrimary;
   height: auto;
-}
-
-h1 {
-  text-align: center;
-  color: $colorHeading;
-  height: 80px;
-  padding-top: 10px;
+  h1 {
+    text-align: center;
+    color: $colorHeading;
+    height: 80px;
+    padding-top: 10px;
+  }
 }
 
 .main {
   @include flex-row;
   height: 1500px;
-}
 
-.main-sidebar-body {
-  @include flex-row;
-  width: 25%;
-  height: 100%;
+  .main-sidebar-body {
+    @include flex-row;
+    width: 25%;
+    height: 100%;
+  }
 }
 
 .body-sidebar-sidebarContainer {
-  background-color: #9A9DAB;
+  background-color: $colorSideBars;
   @include sidebar-border;
   @include flex-column;
   align-items: center;
   text-align: center;
   overflow: scroll;
-}
+  .sidebar-header-name {
+    text-align: center;
+  }
 
-.sidebar-header-name {
-  text-align: center;
-}
+  .sidebar-header-userInfo {
+    font-family: sans-serif;
+    font-weight: bold;
+    font-size: 1.2em;
+    margin: $marginPrimary;
+    width: inherit;
+  }
 
-.sidebar-header-userInfo {
-  font-family: sans-serif;
-  font-weight: bold;
-  font-size: 1.2em;
-  margin: $marginPrimary;
-  width: inherit;
-}
+  .sidebar-header-line {
+    color: $colorHeading;
+    @include sidebar-border;
+    margin: 1em 1em 0 1em;
+    height: 0;
+    width: $cardHistoryWidth;
+  }
 
-.sidebar-header-line {
-  color: $colorHeading;
-  @include sidebar-border;
-  margin: 1em 1em 0 1em;
-  height: 0;
-  width: $cardHistoryWidth;
-}
+  .sidebar-header-userImage {
+    @include sidebar-border-userImage;
+    height: 200px;
+    width: 200px;
+    margin: 4px 2px 2px 2px;
+    justify-content: center;
+  }
 
-.sidebar-header-userImage {
-  @include sidebar-border-userImage;
-  height: 200px;
-  width: 200px;
-  margin: 4px 2px 2px 2px;
-  justify-content: center;
-}
+  .sidebar-body-friendContainer {
+    @include flex-column;
+  }
 
-.sidebar-body-friendContainer {
-  @include flex-column;
-}
-
-.sidebar-friendContainer-listItems {
-  text-align: left;
+  .sidebar-friendContainer-listItems {
+    text-align: left;
+  }
 }
 
 .body-main-infoContainter {
@@ -81,21 +79,20 @@ h1 {
   margin: 0 0 1em;
   @include flex-column;
   overflow: scroll;
-}
+  .main-column-hydration {
+    @include flex-row;
+    height: 25%
+  }
 
-.main-column-hydration {
-  @include flex-row;
-  height: 25%
-}
+  .main-column-activity {
+    @include flex-row;
+    height: $cardHistoryWidth
+  }
 
-.main-column-activity {
-  @include flex-row;
-  height: $cardHistoryWidth
-}
-
-.main-column-sleep {
-  @include flex-row;
-  height: 35%
+  .main-column-sleep {
+    @include flex-row;
+    height: 35%
+  }
 }
 
 .infoContainer-cardContainer-card-horizontal {
