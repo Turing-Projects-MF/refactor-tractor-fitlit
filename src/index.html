@@ -8,32 +8,34 @@
 
 <body>
   <h1 id="headerText">Activity Tracker</h1>
+  <section class="activity__user__log">
+    <label class="user__inputs" id="activity__dropdown" for="userActivityLog">Log an Activity:</label>
+    <select aria-labelledby="activity__dropdown" name="userActivityLog" id="user__activities">
+      <option disabled selected value> -- choose an activity -- </option>
+      <option value="Hydration">Hydration</option>
+      <option value="Sleep">Sleep</option>
+      <option value="Walking">Walking</option>
+    </select>
 
-  <label class="user__inputs" id="activity__dropdown" for="userActivityLog">Choose an Activity to Log:</label>
-  <select aria-labelledby="activity__dropdown" name="userActivityLog" id="user__activities" onchange="">
-    <option value="Hydration">Hydration</option>
-    <option value="Sleep">Sleep</option>
-    <option value="Steps">Steps</option>
-  </select>
-
-  <form class="user__inputs hidden">
-    <label id="userSteps" for="userStepsInput">Number of Steps:</label><br>
-    <input aria-labelledby="userSteps" type="text" id="number__of__steps" name="userStepsInput"><br>
-    <label id="userActive" for="userStepsInput">Active Minutes:</label><br>
-    <input aria-labelledby="userActive" type="text" id="active__minutes" name="userStepsInput">
-    <label id="userStairs" for="userStepsInput">Flight of Stairs:</label><br>
-    <input aria-labelledby="userStairs" type="text" id="flights_stairs" name="userStepsInput">
-  </form>
-  <form class="user__inputs hidden">
-    <label id="userSleep" for="userSleepInput">Hours Slept:</label><br>
-    <input aria-labelledby="userSleep" type="text" id="hours__slept" name="userSleepInput"><br>
-    <label id="userSleepQuality" for="userSleepInput">Sleep Quality</label><br>
-    <input aria-labelledby="userSleepQuality" type="text" id="sleep__quality" name="userSleepInput">
-  </form>
-  <form class="user__inputs hidden">
-    <label id="userHydration" for="userHydrationInput">Total Ounces</label><br>
-    <input aria-labelledby="userHydration" type="text" id="total__water" name="userHydrationInput"><br>
-  </form>
+    <form class="user__inputs hidden" id="user__activity__input">
+      <label class="user__labels" id="userSteps" for="userStepsInput">Number of Steps:</label><br>
+      <input aria-labelledby="userSteps" type="number" min="0" id="number__of__steps" name="userStepsInput" placeholder="Enter Steps.."><br>
+      <label class="user__labels" id="userActive" for="userStepsInput">Active Minutes:</label><br>
+      <input aria-labelledby="userActive" type="number" min="0" id="active__minutes" name="userStepsInput" placeholder="Enter Minutes..">
+      <label class="user__labels" id="userStairs" for="userStepsInput">Flight of Stairs:</label><br>
+      <input aria-labelledby="userStairs" type="number" min="0" id="flights_stairs" name="userStepsInput" placeholder="Enter Flights..">
+    </form>
+    <form class="user__inputs hidden" id="user__sleep__input">
+      <label class="user__labels" id="userSleep" for="userSleepInput">Hours Slept:</label><br>
+      <input aria-labelledby="userSleep" type="number" min="0" id="hours__slept" name="userSleepInput" placeholder="Enter Hours Slept.."><br>
+      <label class="user__labels" id="userSleepQuality" for="userSleepInput">Sleep Quality</label><br>
+      <input aria-labelledby="userSleepQuality" type="number" min="0" id="sleep__quality" name="userSleepInput" placeholder="Enter Sleep Quality..">
+    </form>
+    <form class="user__inputs hidden" id="user__hydration__input">
+      <label class="user__labels" id="userHydration" for="userHydrationInput">Total Ounces</label><br>
+      <input aria-labelledby="userHydration" type="number" min="0" id="total__water" name="userHydrationInput" placeholder="Enter Ounces Drank.."><br>
+    </form>
+  </section>
 
   <main class="main">
     <article class="main__sidebar__body" tabindex="0">
