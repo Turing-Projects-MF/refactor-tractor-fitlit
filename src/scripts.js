@@ -20,6 +20,10 @@ let userRepo;
 let hydrationRepo;
 let sleepRepo;
 let activityRepo;
+let userActivityInput = $('#user__activity__input');
+let userHydrationInput = $('#user__hydration__input');
+let userSleepInput = $('#user__sleep__input');
+
 
 const fetchedUserData = fetch('https://fe-apps.herokuapp.com/api/v1/fitlit/1908/users/userData')
   .then(response => response.json())
@@ -52,7 +56,7 @@ Promise.all([fetchedUserData, fetchedSleepData, fetchedActivityData, fetchedHydr
   })
   .catch(error => console.log(error))
 
-
+$("#user__activities").on("change", runThisFunction)
 
 function startApp() {
   createUserRepo();
@@ -65,6 +69,34 @@ function startApp() {
   displayRandomUserHistory(randomHistory);
   generateInitialInfo(userNowId, activityRepo, userRepo, today, randomHistory, userNow);
   generateActivityInfo(userNowId, activityRepo, today, userRepo, randomHistory, userNow);
+}
+
+function runThisFunction() {
+  if (this.value === 'Hydration') {
+    displayUserHydrationInput();
+  } else if (this.value === 'Sleep') {
+    displayUserSleepInput()
+  } else if (this.value === 'Walking') {
+    displayUserActivityInput()
+  }
+}
+
+function displayUserActivityInput() {
+  userActivityInput.removeClass('hidden');
+  userHydrationInput.addClass('hidden');
+  userSleepInput.addClass('hidden');
+}
+
+function displayUserHydrationInput() {
+  userHydrationInput.removeClass('hidden');
+  userActivityInput.addClass('hidden');
+  userSleepInput.addClass('hidden');
+}
+
+function displayUserSleepInput() {
+  userSleepInput.removeClass('hidden');
+  userHydrationInput.addClass('hidden');
+  userActivityInput.addClass('hidden');
 }
 
 function generateInitialInfo(userNowId, activityRepo, userRepo, today, randomHistory, userNow) {
