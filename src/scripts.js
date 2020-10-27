@@ -132,7 +132,7 @@ function displayUserSidebar(user, userStorage) {
 }
 
 function makeFriendHTML(user, userStorage) {
-  return user.getFriendsNames(userStorage).map(friendName => `<li class='historical-list-listItem'>${friendName}</li>`).join('');
+  return user.getFriendsNames(userStorage).map(friendName => `<li class='historical__list__listItem'>${friendName}</li>`).join('');
 }
 
 function makeWinnerID(activityInfo, user, dateString, userStorage) {
@@ -159,7 +159,7 @@ function addHydrationInfo(id, hydrationInfo, dateString, userStorage, laterDateS
 
 
 function makeHydrationHTML(id, hydrationInfo, userStorage, method) {
-  return method.map(drinkData => `<li class="historical-list-listItem">On ${drinkData}oz</li>`).join('');
+  return method.map(drinkData => `<li class="historical__list__listItem">On ${drinkData}oz</li>`).join('');
 }
 
 function addSleepInfo(id, sleepInfo, dateString, userStorage, laterDateString) {
@@ -171,12 +171,12 @@ function addSleepInfo(id, sleepInfo, dateString, userStorage, laterDateString) {
 }
 
 function makeSleepHTML(id, sleepInfo, userStorage, method) {
-  return method.map(sleepData => `<li class="historical-list-listItem">On ${sleepData} hours</li>`).join('');
+  return method.map(sleepData => `<li class="historical__list__listItem">On ${sleepData} hours</li>`).join('');
 }
 
 //not current used in website
 // function makeSleepQualityHTML(id, sleepInfo, userStorage, method) {
-//   return method.map(sleepQualityData => `<li class="historical-list-listItem">On ${sleepQualityData}/5 quality of sleep</li>`).join('');
+//   return method.map(sleepQualityData => `<li class="historical__list__listItem">On ${sleepQualityData}/5 quality of sleep</li>`).join('');
 // }
 
 function addActivityInfo(id, activityInfo, dateString, userStorage, laterDateString, user, winnerId) {
@@ -209,15 +209,15 @@ function addUserAvgStepDetails(id, activityInfo, dateString, userStorage) {
 }
 
 function makeStepsHTML(id, activityInfo, userStorage, method) {
-  return method.map(activityData => `<li class="historical-list-listItem">On ${activityData} steps</li>`).join('');
+  return method.map(activityData => `<li class="historical__list__listItem">On ${activityData} steps</li>`).join('');
 }
 
 function makeStairsHTML(id, activityInfo, userStorage, method) {
-  return method.map(data => `<li class="historical-list-listItem">On ${data} flights</li>`).join('');
+  return method.map(data => `<li class="historical__list__listItem">On ${data} flights</li>`).join('');
 }
 
 function makeMinutesHTML(id, activityInfo, userStorage, method) {
-  return method.map(data => `<li class="historical-list-listItem">On ${data} minutes</li>`).join('');
+  return method.map(data => `<li class="historical__list__listItem">On ${data} minutes</li>`).join('');
 }
 
 function addFriendGameInfo(id, activityInfo, userStorage, dateString, laterDateString, user) {
@@ -229,9 +229,9 @@ function addFriendGameInfo(id, activityInfo, userStorage, dateString, laterDateS
 }
 
 function makeFriendChallengeHTML(method) {
-  return method.map(friendChallengeData => `<li class="historical-list-listItem">Your friend ${friendChallengeData} average steps.</li>`).join('');
+  return method.map(friendChallengeData => `<li class="historical__list__listItem">Your friend ${friendChallengeData} average steps.</li>`).join('');
 }
 
 function makeStepStreakHTML(method) {
-  return method.map(streakData => `<li class="historical-list-listItem">${streakData}!</li>`).join('');
+  return method.map(streakData => `<li class="historical__list__listItem">${streakData}!</li>`).join('');
 }

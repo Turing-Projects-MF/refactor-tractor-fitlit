@@ -22,25 +22,25 @@ body {
   @include flex-row;
   height: 1500px;
 
-  .main-sidebar-body {
+  .main__sidebar__body {
     @include flex-row;
     width: 25%;
     height: 100%;
   }
 }
 
-.body-sidebar-sidebarContainer {
+.body__sidebar__sidebarContainer {
   background-color: $colorSideBars;
   @include sidebar-border;
   @include flex-column;
   align-items: center;
   text-align: center;
   overflow: scroll;
-  .sidebar-header-name {
+  .sidebar__header__name {
     text-align: center;
   }
 
-  .sidebar-header-userInfo {
+  .sidebar__header__userInfo {
     font-family: sans-serif;
     font-weight: bold;
     font-size: 1.2em;
@@ -48,7 +48,7 @@ body {
     width: inherit;
   }
 
-  .sidebar-header-line {
+  .sidebar__header__line {
     color: $colorHeading;
     @include sidebar-border;
     margin: 1em 1em 0 1em;
@@ -56,7 +56,7 @@ body {
     width: $cardHistoryWidth;
   }
 
-  .sidebar-header-userImage {
+  .sidebar__header__userImage {
     @include sidebar-border-userImage;
     height: 200px;
     width: 200px;
@@ -64,58 +64,58 @@ body {
     justify-content: center;
   }
 
-  .sidebar-body-friendContainer {
+  .sidebar__body__friendContainer {
     @include flex-column;
   }
 
-  .sidebar-friendContainer-listItems {
+  .sidebar__friendContainer__listItems {
     text-align: left;
   }
 }
 
-.body-main-infoContainter {
+.body__main__infoContainter {
   width: $fullWidth;
   border: $sizeBorder solid $colorBorder;
   margin: 0 0 1em;
   @include flex-column;
   overflow: scroll;
-  .main-column-hydration {
+  .main__column__hydration {
     @include flex-row;
     height: 25%
   }
 
-  .main-column-activity {
+  .main__column__activity {
     @include flex-row;
     height: $cardHistoryWidth
   }
 
-  .main-column-sleep {
+  .main__column__sleep {
     @include flex-row;
     height: 35%
   }
 }
 
-.infoContainer-cardContainer-card-horizontal {
+.infoContainer__cardContainer__card__horizontal {
   @include infocontainer-cardContainer;
   @include flex-column;
   align-items: center;
   justify-content: space-between;
 }
 
-.horizontalCard-activity-container {
+.horizontalCard__activity__container {
   @include flex-row;
   justify-content: space-around;
   width: $fullWidth;
   overflow: scroll;
 }
 
-.infoContainer-cardContainer-card-vertical {
+.infoContainer__cardContainer__card__vertical {
   @include flex-row;
   @include infocontainer-cardContainer;
   overflow: scroll;
 }
 
-.card-today-hydration {
+.card__today__hydration {
   @include today-cards;
 
   background-color: $colorHydration;
@@ -123,31 +123,31 @@ body {
   width: $cardHistoryWidth;
 }
 
-.card-today-sleep {
+.card__today__sleep {
   @include today-cards;
   background-color: $colorSleep;
   margin: $marginPrimary;
   width: $cardHistoryWidth;
 }
 
-.card-today-activity {
+.card__today__activity {
   @include today-cards;
   background-color: $colorActivity;
   margin: .3em;
   width: 40%;
 }
 
-.card-history-hydration {
+.card__history__hydration {
   @include history-cards;
   background-color: $colorHydration;
 }
 
-.card-history-sleep {
+.card__history__sleep {
   @include history-cards;
   background-color: $colorSleep;
 }
 
-.card-history-activity {
+.card__history__activity {
   @include history-cards;
   background-color: $colorSleep;
   height: 93%;
@@ -169,7 +169,7 @@ body {
   @include week-data;
 }
 
-.card-vertical-list {
+.card__vertical__list {
   list-style-type: none;
   font-weight: lighter;
   font-style: italic;
@@ -177,7 +177,7 @@ body {
   font-size: $fontSizeSecondary;
 }
 
-.historical-list-listItem {
+.historical__list__listItem {
   padding: .3em;
   font-weight: bold;
   font-family: sans-serif;
