@@ -16,6 +16,8 @@ import Sleep from './Sleep';
 import UserRepo from './User-repo';
 import $ from 'jquery';
 
+import apiRequest from './api-request';
+
 let userRepo;
 let hydrationRepo;
 let sleepRepo;
@@ -23,7 +25,7 @@ let activityRepo;
 let userActivityInput = $('#user__activity__input');
 let userHydrationInput = $('#user__hydration__input');
 let userSleepInput = $('#user__sleep__input');
-
+let currentUser;
 
 const fetchedUserData = fetch('https://fe-apps.herokuapp.com/api/v1/fitlit/1908/users/userData')
   .then(response => response.json())
@@ -56,28 +58,123 @@ Promise.all([fetchedUserData, fetchedSleepData, fetchedActivityData, fetchedHydr
   })
   .catch(error => console.log(error))
 
-$("#user__activities").on("change", runThisFunction)
+// Promise.all([apiRequest.userInfo, apiRequest.sleepInfo, apiRequest.activityInfo, apiRequest.hydrationInfo])
+//   .then(value => {
+//     userData = value[0];
+//     sleepData = value[1];
+//     activityData = value[2];
+//     hydrationData = value[3];
+//     startApp()
+//   })
+//   .catch(error => console.log(error))
+
+
+$("#user__activities").on("change", displayActivityInput)
+$('.user__input__button').on("click", updateUserInformation)
 
 function startApp() {
   createUserRepo();
   createUserData();
   let userNowId = pickUser();
-  let userNow = getUserById(userNowId, userRepo);
+  currentUser = getUserById(userNowId, userRepo);
+  console.log(getTodaysDate());
   let today = makeToday(userRepo, userNowId, hydrationData);
   //today = 2019/09/22
   let randomHistory = makeRandomDate(userRepo, userNowId, hydrationData);
   displayRandomUserHistory(randomHistory);
-  generateInitialInfo(userNowId, activityRepo, userRepo, today, randomHistory, userNow);
-  generateActivityInfo(userNowId, activityRepo, today, userRepo, randomHistory, userNow);
+  generateInitialInfo(userNowId, activityRepo, userRepo, today, randomHistory, currentUser);
+  generateActivityInfo(userNowId, activityRepo, today, userRepo, randomHistory, currentUser);
 }
 
-function runThisFunction() {
+function updateUserInformation() {
+  let value = $('#user__activities').val();
+  switch (value) {
+    case 'Hydration':
+      recordUserHydrationData();
+      break;
+    case 'Sleep':
+      recordUserSleepData();
+      break;
+    case 'Walking':
+      recordUserActityData();
+      break;
+    default:
+      break;
+  }
+}
+
+function getTodaysDate() {
+  var today = new Date();
+  var dd = String(today.getDate()).padStart(2, '0');
+  var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+  var yyyy = today.getFullYear();
+  return today = yyyy + '/' + mm + '/' + dd;
+}
+
+function recordUserActityData() {
+  fetch('https://fe-apps.herokuapp.com/api/v1/fitlit/1908/activity/activityData', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      "userID": currentUser.id,
+      "date": getTodaysDate(),
+      "numSteps": $('#number__of__steps').val(),
+      "minutesActive": $('#active__minutes').val(),
+      "flightsOfStairs": $('#flights_stairs').val()
+    }),
+  })
+  .then(response => response.json())
+  .then(data => console.log(data))
+  .catch(error => console.log(error))
+}
+
+function recordUserSleepData() {
+  fetch('https://fe-apps.herokuapp.com/api/v1/fitlit/1908/sleep/sleepData', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      "userID": currentUser.id,
+      "date": getTodaysDate(),
+      "hoursSlept": $('#hours__slept').val(),
+      "sleepQuality": $('#sleep__quality').val()
+    }),
+  })
+  .then(response => response.json())
+  .then(data => console.log(data))
+  .catch(error => console.log(error))
+}
+
+function recordUserHydrationData() {
+  fetch('https://fe-apps.herokuapp.com/api/v1/fitlit/1908/hydration/hydrationData', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      "userID": currentUser.id,
+      "date": getTodaysDate(),
+      "numOunces": $('#total__water').val()
+    }),
+  })
+  .then(response => response.json())
+  .then(data => console.log(data))
+  .catch(error => console.log(error))
+}
+
+function displayActivityInput() {
   if (this.value === 'Hydration') {
     displayUserHydrationInput();
+    return this.value;
   } else if (this.value === 'Sleep') {
-    displayUserSleepInput()
+    displayUserSleepInput();
+    return this.value;
   } else if (this.value === 'Walking') {
-    displayUserActivityInput()
+    displayUserActivityInput();
+    return this.value;
   }
 }
 
