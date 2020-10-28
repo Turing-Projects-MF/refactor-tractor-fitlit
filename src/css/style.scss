@@ -218,7 +218,7 @@ body {
 }
 
 
-.glow-on-hover {
+.user__input__button {
     width: 150px;
     height: 25px;
     margin-left: 10px;
@@ -232,7 +232,7 @@ body {
     border-radius: 10px;
 }
 
-.glow-on-hover:before {
+.user__input__button:before {
     content: '';
     background: linear-gradient(45deg, #ff0000, #ff7300, #fffb00, #48ff00, #00ffd5, #002bff, #7a00ff, #ff00c8, #ff0000);
     position: absolute;
@@ -249,19 +249,19 @@ body {
     border-radius: 10px;
 }
 
-.glow-on-hover:active {
+.user__input__button:active {
     color: #000
 }
 
-.glow-on-hover:active:after {
+.user__input__button:active:after {
     background: transparent;
 }
 
-.glow-on-hover:hover:before {
+.user__input__button:hover:before {
     opacity: 1;
 }
 
-.glow-on-hover:after {
+.user__input__button:after {
     z-index: -1;
     content: '';
     position: absolute;
