@@ -27,28 +27,12 @@ let userHydrationInput = $('#user__hydration__input');
 let userSleepInput = $('#user__sleep__input');
 let currentUser;
 
-const fetchedUserData = fetch('https://fe-apps.herokuapp.com/api/v1/fitlit/1908/users/userData')
-  .then(response => response.json())
-  .then(data => data.userData)
-  .catch(error => console.log(error));
+const recievedUserData = apiRequest.getUserData();
+const recievedSleepData = apiRequest.getSleepData();
+const recievedActivityData = apiRequest.getActivityData();
+const recievedHydrationData = apiRequest.getHydrationData();
 
-const fetchedSleepData = fetch('https://fe-apps.herokuapp.com/api/v1/fitlit/1908/sleep/sleepData')
-  .then(response => response.json())
-  .then(data => data.sleepData)
-  .catch(error => console.log(error));
-
-const fetchedActivityData = fetch('https://fe-apps.herokuapp.com/api/v1/fitlit/1908/activity/activityData')
-  .then(response => response.json())
-  .then(data => data.activityData)
-  .catch(error => console.log(error));
-
-const fetchedHydrationData = fetch('https://fe-apps.herokuapp.com/api/v1/fitlit/1908/hydration/hydrationData')
-  .then(response => response.json())
-  .then(data => data.hydrationData)
-  .catch(error => console.log(error));
-
-
-Promise.all([fetchedUserData, fetchedSleepData, fetchedActivityData, fetchedHydrationData])
+Promise.all([recievedUserData, recievedSleepData, recievedActivityData, recievedHydrationData])
   .then(value => {
     userData = value[0];
     sleepData = value[1];
@@ -58,17 +42,6 @@ Promise.all([fetchedUserData, fetchedSleepData, fetchedActivityData, fetchedHydr
   })
   .catch(error => console.log(error))
 
-// Promise.all([apiRequest.userInfo, apiRequest.sleepInfo, apiRequest.activityInfo, apiRequest.hydrationInfo])
-//   .then(value => {
-//     userData = value[0];
-//     sleepData = value[1];
-//     activityData = value[2];
-//     hydrationData = value[3];
-//     startApp()
-//   })
-//   .catch(error => console.log(error))
-
-
 $("#user__activities").on("change", displayActivityInput)
 $('.user__input__button').on("click", updateUserInformation)
 
@@ -77,9 +50,7 @@ function startApp() {
   createUserData();
   let userNowId = pickUser();
   currentUser = getUserById(userNowId, userRepo);
-  console.log(getTodaysDate());
   let today = makeToday(userRepo, userNowId, hydrationData);
-  //today = 2019/09/22
   let randomHistory = makeRandomDate(userRepo, userNowId, hydrationData);
   displayRandomUserHistory(randomHistory);
   generateInitialInfo(userNowId, activityRepo, userRepo, today, randomHistory, currentUser);
