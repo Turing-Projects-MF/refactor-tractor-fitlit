@@ -210,16 +210,6 @@ describe('Activity', function() {
       });
   });
 
-  it('should return user info by date and id', function() {
-    expect(activity.getUserInfoByDateAndId(1, "2019/06/15")).to.eql({
-      userID: 1,
-      date: '2019/06/15',
-      numSteps: 3577,
-      minutesActive: 140,
-      flightsOfStairs: 16
-    });
-  });
-
   it('should return the miles a given user has walked on a given date', function() {
     expect(activity.getMilesFromStepsByDate(1, "2019/06/15", userRepo.users[0])).to.eql(3);
   });
@@ -603,7 +593,7 @@ describe('Friend Activity', function() {
 
   it('should get a users ranked friendslist activity for a chosen week with names', function() {
     expect(activity.showChallengeListAndWinner(user4, "2019/06/15", userRepo)).to.eql([
-      'Allie McCarthy: 9552', 'Alex Roth: 7476' 
+      'Allie McCarthy: 9552', 'Alex Roth: 7476'
     ])
   });
 

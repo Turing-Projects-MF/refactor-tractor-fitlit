@@ -9,6 +9,10 @@ class Fitness {
       return total;
     }, 0) / data.length;
   }
+
+  getUserInfoByDateAndId(id, date, dataType) {
+    return dataType.find(data => id === data.userID && date === data.date);
+  }
 }
 
 export default Fitness;

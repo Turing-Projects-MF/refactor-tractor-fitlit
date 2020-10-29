@@ -7,12 +7,12 @@ class Hydration extends Fitness {
   }
 
   calculateAverageOunces(id) {
-    let perDayUserHydration = this.hydrationData.filter((data) => id === data.userID);
+    let perDayUserHydration = this.hydrationData.filter(data => id === data.userID);
     return this.getAverage(perDayUserHydration, 'numOunces').toFixed(0);
   }
 
   calculateDailyOunces(id, date) {
-    let findOuncesByDate = this.hydrationData.find((data) => id === data.userID && date === data.date);
+    let findOuncesByDate = this.getUserInfoByDateAndId(id, date, this.hydrationData)
     return findOuncesByDate.numOunces;
   }
 

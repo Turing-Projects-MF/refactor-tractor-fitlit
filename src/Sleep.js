@@ -22,7 +22,7 @@ class Sleep extends Fitness {
   }
 
   findSleepDataByDate(id, date) {
-    return this.sleepData.find((data) => id === data.userID && date === data.date);
+    return this.getUserInfoByDateAndId(id, date, this.sleepData)
   }
 
   calculateDailySleep(id, date) {
