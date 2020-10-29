@@ -1,4 +1,4 @@
-import sleepData from './data/sleep';
+//import sleepData from './data/sleep';
 import Fitness from './Fitness';
 
 class Sleep extends Fitness {
@@ -7,17 +7,17 @@ class Sleep extends Fitness {
     this.sleepData = sleepData;
   }
 
-  filterSleepDataPerDay(id) {
-    return this.sleepData.filter((data) => id === data.userID);
+  filterSleepDataPerDay(id, dataType) {
+    return this.filterDataByUserId(id, dataType);
   }
 
-  calculateAverageSleep(id) {
-    let perDaySleep = this.filterSleepDataPerDay(id);
+  calculateAverageSleep(id, dataType) {
+    let perDaySleep = this.filterSleepDataPerDay(id, dataType);
     return this.getAverage(perDaySleep, "hoursSlept");
   }
 
-  calculateAverageSleepQuality(id) {
-    let perDaySleepQuality = this.filterSleepDataPerDay(id);
+  calculateAverageSleepQuality(id, dataType) {
+    let perDaySleepQuality = this.filterSleepDataPerDay(id, dataType);
     return this.getAverage(perDaySleepQuality, "sleepQuality");
   }
 
@@ -62,20 +62,19 @@ class Sleep extends Fitness {
     })
   }
 
-  determineBestSleepers(date, userRepo) {
+  determineBestSleepers(date, userRepo, property) {
     let timeline = userRepo.chooseWeekDataForAllUsers(this.sleepData, date);
-    let userSleepObject = userRepo.isolateUsernameAndRelevantData(this.sleepData, date, "sleepQuality", timeline);
+    let userSleepObject = userRepo.isolateUsernameAndRelevantData(this.sleepData, date, property, timeline);
     return this.getUserNames(userSleepObject, userRepo)
   }
 
-  determineSleepWinnerForWeek(date, userRepo) {
-    let sleepRankWithData = this.getUserSleepObject(date, userRepo, "sleepQuality");
+  determineSleepWinnerForWeek(date, userRepo, property) {
+    let sleepRankWithData = this.getUserSleepObject(date, userRepo, property);
     return this.getWinnerNamesFromList(sleepRankWithData, userRepo);
   }
 
-  determineSleepHoursWinnerForDay(date, userRepo) {
-    let sleepRankWithData = this.getUserSleepObject(date, userRepo, "hoursSlept")
-    console.log(sleepRankWithData);
+  determineSleepHoursWinnerForDay(date, userRepo, property) {
+    let sleepRankWithData = this.getUserSleepObject(date, userRepo, property);
     return this.getWinnerNamesFromList(sleepRankWithData, userRepo);
   }
 

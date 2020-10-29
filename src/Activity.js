@@ -33,9 +33,8 @@ class Activity extends Fitness {
       .map(data => data.date);
   }
 
-  getStairRecord(id) {
-    return this.activityData
-      .filter(data => id === data.userID)
+  getStairRecord(id, dataType) {
+    return this.filterDataByUserId(id, dataType)
       .reduce((acc, elem) => (elem.flightsOfStairs > acc) ? elem.flightsOfStairs : acc, 0);
   }
 

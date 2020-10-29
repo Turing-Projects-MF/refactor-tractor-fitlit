@@ -238,7 +238,7 @@ describe('Activity', function() {
   });
 
   it('should return the highest number of stairs climbed in a day for all time', function() {
-    expect(activity.getStairRecord(11)).to.eql(33);
+    expect(activity.getStairRecord(11, activity.activityData)).to.eql(33);
   });
 
   it('should return the average flight of stairs for all users on given day', function() {

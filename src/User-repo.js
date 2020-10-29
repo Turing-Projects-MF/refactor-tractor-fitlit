@@ -11,14 +11,11 @@ class UserRepo extends Fitness {
   }
 
   getDataFromUserID(id, dataSet) {
-    return dataSet.filter((userData) => id === userData.userID);
+    return this.filterDataByUserId(id, dataSet);
   }
 
-  calculateAverageStepGoal() {
-    var totalStepGoal = this.users.reduce((total, data) => {
-      return total = total + data.dailyStepGoal;
-    }, 0);
-    return totalStepGoal / this.users.length;
+  calculateAverageStepGoal(data, property) {
+    return this.getAverage(data, property)
   }
 
   makeSortedUserArray(id, dataSet) {

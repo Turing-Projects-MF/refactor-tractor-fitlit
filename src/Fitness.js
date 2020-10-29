@@ -13,6 +13,10 @@ class Fitness {
   getUserInfoByDateAndId(id, date, dataType) {
     return dataType.find(data => id === data.userID && date === data.date);
   }
+
+  filterDataByUserId(id, dataType) {
+    return dataType.filter(data => id === data.userID);
+  }
 }
 
 export default Fitness;
