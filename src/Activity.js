@@ -1,19 +1,18 @@
-class Activity {
-  constructor(activityData) {
-    this.activityData = activityData
-  }
+import Fitness from './Fitness';
 
-  getUserInfoByDateAndId(id, date) {
-    return this.activityData.find(data => id === data.userID && date === data.date);
+class Activity extends Fitness {
+  constructor(activityData) {
+    super(activityData)
+      this.activityData = activityData
   }
 
   getMilesFromStepsByDate(id, date, userRepo) {
-    let userStepsByDate = this.getUserInfoByDateAndId(id, date);
+    let userStepsByDate = this.getUserInfoByDateAndId(id, date, this.activityData);
     return parseFloat(((userStepsByDate.numSteps * userRepo.strideLength) / 5280).toFixed(0));
   }
 
   getActiveMinutesByDate(id, date) {
-    let userActivityByDate = this.getUserInfoByDateAndId(id, date);
+    let userActivityByDate = this.getUserInfoByDateAndId(id, date, this.activityData);
     return userActivityByDate.minutesActive;
   }
 
@@ -24,7 +23,7 @@ class Activity {
   }
 
   accomplishStepGoal(id, date, userRepo) {
-    let userStepsByDate = this.getUserInfoByDateAndId(id, date);
+    let userStepsByDate = this.getUserInfoByDateAndId(id, date, this.activityData);
     return userStepsByDate.numSteps === userRepo.dailyStepGoal ? true : false;
   }
 
@@ -34,9 +33,8 @@ class Activity {
       .map(data => data.date);
   }
 
-  getStairRecord(id) {
-    return this.activityData
-      .filter(data => id === data.userID)
+  getStairRecord(id, dataType) {
+    return this.filterDataByUserId(id, dataType)
       .reduce((acc, elem) => (elem.flightsOfStairs > acc) ? elem.flightsOfStairs : acc, 0);
   }
 

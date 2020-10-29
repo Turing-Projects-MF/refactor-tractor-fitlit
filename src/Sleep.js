@@ -1,32 +1,28 @@
-import sleepData from './data/sleep';
+//import sleepData from './data/sleep';
+import Fitness from './Fitness';
 
-class Sleep {
+class Sleep extends Fitness {
   constructor(sleepData) {
+    super(sleepData)
     this.sleepData = sleepData;
   }
 
-  getAverageOfValues(data, sleepProperty = null) {
-    return data.reduce((total, value) => {
-      return sleepProperty === null ? total += value : total += value[sleepProperty]
-    }, 0) / data.length;
+  filterSleepDataPerDay(id, dataType) {
+    return this.filterDataByUserId(id, dataType);
   }
 
-  filterSleepDataPerDay(id) {
-    return this.sleepData.filter((data) => id === data.userID);
+  calculateAverageSleep(id, dataType) {
+    let perDaySleep = this.filterSleepDataPerDay(id, dataType);
+    return this.getAverage(perDaySleep, "hoursSlept");
   }
 
-  calculateAverageSleep(id) {
-    let perDaySleep = this.filterSleepDataPerDay(id);
-    return this.getAverageOfValues(perDaySleep, "hoursSlept");
-  }
-
-  calculateAverageSleepQuality(id) {
-    let perDaySleepQuality = this.filterSleepDataPerDay(id);
-    return this.getAverageOfValues(perDaySleepQuality, "sleepQuality");
+  calculateAverageSleepQuality(id, dataType) {
+    let perDaySleepQuality = this.filterSleepDataPerDay(id, dataType);
+    return this.getAverage(perDaySleepQuality, "sleepQuality");
   }
 
   findSleepDataByDate(id, date) {
-    return this.sleepData.find((data) => id === data.userID && date === data.date);
+    return this.getUserInfoByDateAndId(id, date, this.sleepData)
   }
 
   calculateDailySleep(id, date) {
@@ -48,7 +44,7 @@ class Sleep {
   }
 
   calculateAllUserSleepQuality() {
-    var totalSleepQuality = this.getAverageOfValues(this.sleepData, "sleepQuality");
+    var totalSleepQuality = this.getAverage(this.sleepData, "sleepQuality");
     return totalSleepQuality;
   }
 
@@ -60,26 +56,25 @@ class Sleep {
 
   getUserNames(userSleepObject, userRepo) {
     return Object.keys(userSleepObject).filter((key) => {
-      return this.getAverageOfValues(userSleepObject[key]) > 3;
+      return this.getAverage(userSleepObject[key]) > 3;
     }).map((sleeper) => {
       return userRepo.getDataFromID(parseInt(sleeper)).name;
     })
   }
 
-  determineBestSleepers(date, userRepo) {
+  determineBestSleepers(date, userRepo, property) {
     let timeline = userRepo.chooseWeekDataForAllUsers(this.sleepData, date);
-    let userSleepObject = userRepo.isolateUsernameAndRelevantData(this.sleepData, date, "sleepQuality", timeline);
+    let userSleepObject = userRepo.isolateUsernameAndRelevantData(this.sleepData, date, property, timeline);
     return this.getUserNames(userSleepObject, userRepo)
   }
 
-  determineSleepWinnerForWeek(date, userRepo) {
-    let sleepRankWithData = this.getUserSleepObject(date, userRepo, "sleepQuality");
+  determineSleepWinnerForWeek(date, userRepo, property) {
+    let sleepRankWithData = this.getUserSleepObject(date, userRepo, property);
     return this.getWinnerNamesFromList(sleepRankWithData, userRepo);
   }
 
-  determineSleepHoursWinnerForDay(date, userRepo) {
-    let sleepRankWithData = this.getUserSleepObject(date, userRepo, "hoursSlept")
-    console.log(sleepRankWithData);
+  determineSleepHoursWinnerForDay(date, userRepo, property) {
+    let sleepRankWithData = this.getUserSleepObject(date, userRepo, property);
     return this.getWinnerNamesFromList(sleepRankWithData, userRepo);
   }
 
