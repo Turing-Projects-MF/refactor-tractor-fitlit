@@ -1,8 +1,11 @@
-class UserRepo {
+import Fitness from './Fitness'
+
+class UserRepo extends Fitness {
   constructor(users) {
-    this.users = users;
+    super(users)
+      this.users = users;
   }
-  
+
   getDataFromID(id) {
     return this.users.find((user) => id === user.id);
   }
@@ -66,17 +69,10 @@ class UserRepo {
     }, {});
   }
 
-  getAverageOfValues(data) {
-    return data.reduce((total, value) => {
-      total += value;
-      return total;
-    }, 0) / data.length;
-  }
-
   rankUserIDsbyRelevantDataValue(dataSet, date, relevantData, listFromMethod) {
     let sortedObjectKeys = this.isolateUsernameAndRelevantData(dataSet, date, relevantData, listFromMethod);
     return Object.keys(sortedObjectKeys).sort((b, a) => {
-      return (this.getAverageOfValues(sortedObjectKeys[a])) - (this.getAverageOfValues(sortedObjectKeys[b]));
+      return (this.getAverage(sortedObjectKeys[a])) - (this.getAverage(sortedObjectKeys[b]));
     });
   }
 
@@ -85,7 +81,7 @@ class UserRepo {
     let rankedUsersAndAverages = this.rankUserIDsbyRelevantDataValue(dataSet, date, relevantData, listFromMethod)
     return rankedUsersAndAverages.map(rankedUser => {
       return rankedUser = {
-        [rankedUser]: this.getAverageOfValues(sortedObjectKeys[rankedUser])
+        [rankedUser]: this.getAverage(sortedObjectKeys[rankedUser])
       };
     });
   }

@@ -4,8 +4,8 @@ class Fitness {
   }
 
   getAverage(data, property = null) {
-    return this.data.reduce((total, value) => {
-      total += value[property];
+    return data.reduce((total, value) => {
+      property === null ? total += value : total += value[property]
       return total;
     }, 0) / data.length;
   }

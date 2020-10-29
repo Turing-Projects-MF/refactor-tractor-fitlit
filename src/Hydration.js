@@ -1,18 +1,14 @@
-class Hydration {
-  constructor(hydrationData) {
-    this.hydrationData = hydrationData;
-  }
+import Fitness from './Fitness';
 
-  getAverageOfValues(data) {
-    return data.reduce((total, value) => {
-      total += value.numOunces;
-      return total;
-    }, 0) / data.length;
+class Hydration extends Fitness {
+  constructor(hydrationData) {
+    super(hydrationData)
+      this.hydrationData = hydrationData;
   }
 
   calculateAverageOunces(id) {
     let perDayUserHydration = this.hydrationData.filter((data) => id === data.userID);
-    return this.getAverageOfValues(perDayUserHydration).toFixed(0);
+    return this.getAverage(perDayUserHydration, 'numOunces').toFixed(0);
   }
 
   calculateDailyOunces(id, date) {

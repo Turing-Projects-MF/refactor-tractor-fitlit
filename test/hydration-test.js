@@ -141,10 +141,6 @@ describe('Hydration', function() {
       });
   });
 
-  it('should get average data of the provided data', function() {
-    expect(hydration.getAverageOfValues(hydrationData).toFixed(2)).to.eql('29.61')
-  });
-
   it('should find the average water intake per day for a user', function() {
     expect(hydration.calculateAverageOunces(3)).to.equal('2');
   });

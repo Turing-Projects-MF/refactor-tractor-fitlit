@@ -3,9 +3,6 @@ import { expect } from 'chai';
 import UserRepo from '../src/User-repo';
 import User from '../src/User';
 
-// const hydrationDataInfo = require('../data/hydration.js');
-// const hydrationDataSet = hydrationDataInfo.hydrationData;
-
 describe('User Repo', function() {
   let user1;
   let user2;
@@ -22,6 +19,7 @@ describe('User Repo', function() {
       dailyStepGoal: 10000,
       friends: [2, 3, 4]
     });
+
     user2 = new User({
       id: 2,
       name: "Allie McCarthy",
@@ -31,7 +29,9 @@ describe('User Repo', function() {
       dailyStepGoal: 9000,
       friends: [1, 3, 4]
     });
+
     users = [user1, user2];
+
     userRepo = new UserRepo(users);
   });
 
@@ -76,6 +76,7 @@ describe('User Repo', function() {
         dailyStepGoal: 10000,
         friends: [2, 3, 4]
       });
+
       user2 = new User({
         id: 2,
         name: "Allie McCarthy",
@@ -85,6 +86,7 @@ describe('User Repo', function() {
         dailyStepGoal: 9000,
         friends: [1, 3, 4]
       });
+
       user3 = new User({
         id: 3,
         name: "The Rock",
@@ -94,6 +96,7 @@ describe('User Repo', function() {
         dailyStepGoal: 60000,
         friends: [1, 2, 4]
       });
+
       user4 = new User({
         id: 4,
         name: "Rainbow Dash",
@@ -113,7 +116,9 @@ describe('User Repo', function() {
         dailyStepGoal: 7000,
         friends: [1, 2, 3]
       });
+
       users = [user1, user2, user3, user4, user5];
+
       userRepo = new UserRepo(users);
 
       hydrationData = [{
@@ -431,6 +436,7 @@ describe('User Repo', function() {
         }
       ];
     });
+
     it('should get a users data from its userID in any data set', function() {
       expect(userRepo.getDataFromUserID(1, hydrationData)).to.eql([{
           "userID": 1,
@@ -449,19 +455,24 @@ describe('User Repo', function() {
         }
       ]);
     });
+
     it('should get a users most recent date using the app', function() {
       expect(userRepo.getToday(4, hydrationData)).to.eql("2019/09/20");
     });
+
     it('should sort data by date and extract its week', function() {
 
       expect(userRepo.getFirstWeek(4, hydrationData)[3].date).to.eql("2019/09/17");
     });
+
     it('should get a date index', function() {
       expect(userRepo.getDateIndex('2019/06/15', 1, hydrationData)).to.eql(0);
     });
+
     it('should get a sorted week of data for a single user from a date', function() {
       expect(userRepo.getWeekFromDate('2019/09/17', 4, hydrationData)[3].date).to.eql("2019/04/15");
     });
+
     it('should get a week of data for all users in data set', function() {
       const weekHydrationData = userRepo.chooseWeekDataForAllUsers(hydrationData, '2019/09/17');
 
@@ -474,6 +485,7 @@ describe('User Repo', function() {
       expect(dayUserData[2].date).to.eql('2019/06/15');
       expect(dayUserData[2].userID).to.eql(5);
     });
+
     it('should isolate a user ID and its values of sleep data', function() {
       const getSleepDataByUserId = userRepo.isolateUsernameAndRelevantData(
         sleepData,
@@ -488,6 +500,7 @@ describe('User Repo', function() {
         '5': [4, 4, 4, 4, 4, 4, 4]
       })
     });
+
     it('should isolate a user ID and its values of hydration data', function() {
       const getHydrationDataByUserId = userRepo.isolateUsernameAndRelevantData(
         hydrationData,
@@ -500,14 +513,11 @@ describe('User Repo', function() {
         '3': [1]
       });
     });
-    it('should get average data of the provided data', function() {
-      const values = [3.5, 4, 3.3, 3.6, 3.6, 4, 3.1];
 
-      expect(userRepo.getAverageOfValues(values).toFixed(2)).to.eql('3.59')
-    });
     it('should rank user ids according to relevant data value averages', function() {
       expect(userRepo.rankUserIDsbyRelevantDataValue(sleepData, "2019/06/21", 'sleepQuality', userRepo.chooseWeekDataForAllUsers(sleepData, "2019/06/21"))).to.eql(['5', '2', '4'])
     });
+
     it('should show list in order of userID and average of relevant value', function() {
       expect(userRepo.combineRankedUserIDsAndAveragedData(sleepData, "2019/06/21", 'sleepQuality', userRepo.chooseWeekDataForAllUsers(sleepData, "2019/06/21"))[0]).to.eql({
         '5': 4

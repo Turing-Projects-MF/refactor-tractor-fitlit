@@ -299,9 +299,9 @@ describe('Sleep', function() {
     userRepo = new UserRepo(users);
   });
 
-  it('should get average data of the provided data', function() {
-    expect(sleep.getAverageOfValues(sleepData, "hoursSlept").toFixed(2)).to.eql('7.23');
-  });
+  // it('should get average data of the provided data', function() {
+  //   expect(sleep.getAverageOfValues(sleepData, "hoursSlept").toFixed(2)).to.eql('7.23');
+  // });
 
   it('should filter sleep data by date', function() {
     expect(sleep.filterSleepDataPerDay(1)).to.deep.eql([

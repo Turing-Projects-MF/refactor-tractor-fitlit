@@ -1,14 +1,10 @@
 import sleepData from './data/sleep';
+import Fitness from './Fitness';
 
-class Sleep {
+class Sleep extends Fitness {
   constructor(sleepData) {
+    super(sleepData)
     this.sleepData = sleepData;
-  }
-
-  getAverageOfValues(data, sleepProperty = null) {
-    return data.reduce((total, value) => {
-      return sleepProperty === null ? total += value : total += value[sleepProperty]
-    }, 0) / data.length;
   }
 
   filterSleepDataPerDay(id) {
@@ -17,12 +13,12 @@ class Sleep {
 
   calculateAverageSleep(id) {
     let perDaySleep = this.filterSleepDataPerDay(id);
-    return this.getAverageOfValues(perDaySleep, "hoursSlept");
+    return this.getAverage(perDaySleep, "hoursSlept");
   }
 
   calculateAverageSleepQuality(id) {
     let perDaySleepQuality = this.filterSleepDataPerDay(id);
-    return this.getAverageOfValues(perDaySleepQuality, "sleepQuality");
+    return this.getAverage(perDaySleepQuality, "sleepQuality");
   }
 
   findSleepDataByDate(id, date) {
@@ -48,7 +44,7 @@ class Sleep {
   }
 
   calculateAllUserSleepQuality() {
-    var totalSleepQuality = this.getAverageOfValues(this.sleepData, "sleepQuality");
+    var totalSleepQuality = this.getAverage(this.sleepData, "sleepQuality");
     return totalSleepQuality;
   }
 
@@ -60,7 +56,7 @@ class Sleep {
 
   getUserNames(userSleepObject, userRepo) {
     return Object.keys(userSleepObject).filter((key) => {
-      return this.getAverageOfValues(userSleepObject[key]) > 3;
+      return this.getAverage(userSleepObject[key]) > 3;
     }).map((sleeper) => {
       return userRepo.getDataFromID(parseInt(sleeper)).name;
     })
