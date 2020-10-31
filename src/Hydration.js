@@ -2,8 +2,8 @@ import Fitness from './Fitness';
 
 class Hydration extends Fitness {
   constructor(hydrationData) {
-    super(hydrationData)
-      this.hydrationData = hydrationData;
+    super(hydrationData);
+    this.hydrationData = hydrationData;
   }
 
   calculateAverageOunces(id, dataType) {
@@ -12,7 +12,7 @@ class Hydration extends Fitness {
   }
 
   calculateDailyOunces(id, date) {
-    let findOuncesByDate = this.getUserInfoByDateAndId(id, date, this.hydrationData)
+    let findOuncesByDate = this.getUserInfoByDateAndId(id, date, this.hydrationData);
     return findOuncesByDate.numOunces;
   }
 
@@ -30,6 +30,5 @@ class Hydration extends Fitness {
     return this.getOuncesPerDay(randomWeekOunces);
   }
 }
-
 
 export default Hydration;

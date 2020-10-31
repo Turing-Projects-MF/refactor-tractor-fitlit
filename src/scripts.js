@@ -53,7 +53,8 @@ function startApp() {
   currentUser = getUserById(userNowId, userRepo);
   let today = makeToday(userRepo, userNowId, hydrationData);
   let randomHistory = makeRandomDate(userRepo, userNowId, hydrationData);
-  displayRandomUserHistory(randomHistory);
+  domDisplay.displayRandomUserHistory(randomHistory);
+  console.log(randomHistory)
   generateInitialInfo(userNowId, activityRepo, userRepo, today, randomHistory, currentUser);
   generateActivityInfo(userNowId, activityRepo, today, userRepo, randomHistory, currentUser);
 }
@@ -61,24 +62,24 @@ function startApp() {
 function updateUserInformation() {
   let value = $('#user__activities').val();
   switch (value) {
-    case 'Hydration':
-      recordUserHydrationData();
-      break;
-    case 'Sleep':
-      recordUserSleepData();
-      break;
-    case 'Walking':
-      recordUserActityData();
-      break;
-    default:
-      break;
+  case 'Hydration':
+    recordUserHydrationData();
+    break;
+  case 'Sleep':
+    recordUserSleepData();
+    break;
+  case 'Walking':
+    recordUserActityData();
+    break;
+  default:
+    break;
   }
 }
 
 function getTodaysDate() {
   var today = new Date();
   var dd = String(today.getDate()).padStart(2, '0');
-  var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+  var mm = String(today.getMonth() + 1).padStart(2, '0');
   var yyyy = today.getFullYear();
   return today = yyyy + '/' + mm + '/' + dd;
 }
@@ -97,8 +98,8 @@ function recordUserActityData() {
       "flightsOfStairs": $('#flights_stairs').val()
     }),
   })
-  .then(response => response.json())
-  .catch(error => console.log(error))
+    .then(response => response.json())
+    .catch(error => console.log(error))
 }
 
 function recordUserSleepData() {
@@ -114,8 +115,8 @@ function recordUserSleepData() {
       "sleepQuality": $('#sleep__quality').val()
     }),
   })
-  .then(response => response.json())
-  .catch(error => console.log(error))
+    .then(response => response.json())
+    .catch(error => console.log(error))
 }
 
 function recordUserHydrationData() {
@@ -130,8 +131,8 @@ function recordUserHydrationData() {
       "numOunces": $('#total__water').val()
     }),
   })
-  .then(response => response.json())
-  .catch(error => console.log(error))
+    .then(response => response.json())
+    .catch(error => console.log(error))
 }
 
 function displayActivityInput() {
@@ -177,10 +178,6 @@ function generateActivityInfo(userNowId, activityRepo, today, userRepo, randomHi
   domDisplay.addSleepInfo(userNowId, sleepRepo, today, userRepo, randomHistory);
 }
 
-function displayRandomUserHistory(randomDay) {
-  document.querySelectorAll('.historicalWeek').forEach(instance => instance.insertAdjacentHTML('afterBegin', `Week of ${randomDay}`));
-}
-
 function createUserRepo() {
   let userList = [];
   makeUsers(userList);
@@ -197,7 +194,7 @@ function makeUsers(array) {
   userData.forEach(dataItem => {
     let user = new User(dataItem);
     array.push(user);
-  })
+  });
 }
 
 function pickUser() {
@@ -215,13 +212,13 @@ function addInfoToSidebar(user, userStorage) {
 
 function makeToday(userStorage, id, dataSet) {
   const sortedArray = userStorage.makeSortedUserArray(id, dataSet);
+  console.log(sortedArray)
   return sortedArray[0].date;
 }
 
 function makeRandomDate(userStorage, id, dataSet) {
   const sortedArray = userStorage.makeSortedUserArray(id, dataSet);
   return sortedArray[Math.floor(Math.random() * sortedArray.length + 1)].date;
-
 }
 
 function addActivityInfo(id, activityInfo, dateString, userStorage, laterDateString, user, winnerId) {
