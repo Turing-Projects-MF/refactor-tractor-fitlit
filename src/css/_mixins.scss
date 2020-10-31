@@ -4,6 +4,7 @@
   display: flex;
   flex-direction: row;
 }
+
 @mixin flex-column {
   display: flex;
   flex-direction: column;
@@ -11,15 +12,15 @@
 
 @mixin sidebar-border {
   border: {
-    width: $sizeBorder;
+    width: $size-border;
     style: solid;
-    color: $colorBorder;
+    color: $color-border;
   }
 }
 
 @mixin sidebar-border-userImage {
   @include sidebar-border;
-  border-radius: $cardHistoryWidth;
+  border-radius: $card-history-width;
 }
 
 @mixin cards {
@@ -32,28 +33,28 @@
   @include cards;
   height: auto;
   justify-content: space-between;
-  font-size: $fontSizePrimary;
+  font-size: $font-size-primary;
 }
 
 @mixin history-cards {
   @include cards;
-  width: $cardHistoryWidth;
+  width: $card-history-width;
   justify-content: flex-start;
-  font-size: $fontSizeSecondary;
-  margin: $marginPrimary;
+  font-size: $font-size-secondary;
+  margin: $margin-primary;
 }
 
 @mixin infocontainer-cardContainer {
-  width: $fullWidth;
-  background-color: $colorHeading;
-  border: $sizeBorder solid $colorBorder;
-  margin: $infoContainerMargin;
+  width: $full-width;
+  background-color: $color-heading;
+  border: $size-border solid $color-border;
+  margin: $info-container-margin;
 }
 
 @mixin week-data {
   text-align: center;
-  font-size: $fontSizeSecondary;
+  font-size: $font-size-secondary;
   font-weight: bolder;
-  margin: $marginPrimary;
-  color: $colorBorder;
+  margin: $margin-primary;
+  color: $color-border;
 }

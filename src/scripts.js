@@ -54,7 +54,6 @@ function startApp() {
   let today = makeToday(userRepo, userNowId, hydrationData);
   let randomHistory = makeRandomDate(userRepo, userNowId, hydrationData);
   domDisplay.displayRandomUserHistory(randomHistory);
-  console.log(randomHistory)
   generateInitialInfo(userNowId, activityRepo, userRepo, today, randomHistory, currentUser);
   generateActivityInfo(userNowId, activityRepo, today, userRepo, randomHistory, currentUser);
 }
@@ -212,7 +211,6 @@ function addInfoToSidebar(user, userStorage) {
 
 function makeToday(userStorage, id, dataSet) {
   const sortedArray = userStorage.makeSortedUserArray(id, dataSet);
-  console.log(sortedArray)
   return sortedArray[0].date;
 }
 
