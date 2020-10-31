@@ -2,8 +2,8 @@ import Fitness from './Fitness'
 
 class UserRepo extends Fitness {
   constructor(users) {
-    super(users)
-      this.users = users;
+    super(users);
+    this.users = users;
   }
 
   getDataFromID(id) {
@@ -11,15 +11,15 @@ class UserRepo extends Fitness {
   }
 
   getDataFromUserID(id, dataSet) {
-    return this.filterDataByUserId(id, dataSet);
-  }
+   return this.filterDataByUserId(id, dataSet);
+ }
 
   calculateAverageStepGoal(data, property) {
-    return this.getAverage(data, property)
+    return this.getAverage(data, property);
   }
 
   makeSortedUserArray(id, dataSet) {
-    let selectedID = this.getDataFromUserID(id, dataSet)
+    let selectedID = this.getDataFromUserID(id, dataSet);
     let sortedByDate = selectedID.sort((a, b) => new Date(b.date) - new Date(a.date));
     return sortedByDate;
   }
@@ -45,13 +45,13 @@ class UserRepo extends Fitness {
 
   chooseWeekDataForAllUsers(dataSet, date) {
     return dataSet.filter(dataItem => {
-      return (new Date(date)).setDate((new Date(date)).getDate() - 7) <= new Date(dataItem.date) && new Date(dataItem.date) <= new Date(date)
+      return (new Date(date)).setDate((new Date(date)).getDate() - 7) <= new Date(dataItem.date) && new Date(dataItem.date) <= new Date(date);
     })
   }
 
   chooseDayDataForAllUsers(dataSet, date) {
     return dataSet.filter(dataItem => {
-      return dataItem.date === date
+      return dataItem.date === date;
     });
   }
 
@@ -74,8 +74,8 @@ class UserRepo extends Fitness {
   }
 
   combineRankedUserIDsAndAveragedData(dataSet, date, relevantData, listFromMethod) {
-    let sortedObjectKeys = this.isolateUsernameAndRelevantData(dataSet, date, relevantData, listFromMethod)
-    let rankedUsersAndAverages = this.rankUserIDsbyRelevantDataValue(dataSet, date, relevantData, listFromMethod)
+    let sortedObjectKeys = this.isolateUsernameAndRelevantData(dataSet, date, relevantData, listFromMethod);
+    let rankedUsersAndAverages = this.rankUserIDsbyRelevantDataValue(dataSet, date, relevantData, listFromMethod);
     return rankedUsersAndAverages.map(rankedUser => {
       return rankedUser = {
         [rankedUser]: this.getAverage(sortedObjectKeys[rankedUser])
