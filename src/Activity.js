@@ -34,7 +34,7 @@ class Activity extends Fitness {
   }
 
   getStairRecord(id, dataType) {
-    return this.filterDataByUserId(id, dataType)
+  return this.filterDataByUserId(id, dataType)
       .reduce((acc, elem) => (elem.flightsOfStairs > acc) ? elem.flightsOfStairs : acc, 0);
   }
 
