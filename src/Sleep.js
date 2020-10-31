@@ -1,9 +1,8 @@
-//import sleepData from './data/sleep';
 import Fitness from './Fitness';
 
 class Sleep extends Fitness {
   constructor(sleepData) {
-    super(sleepData)
+    super(sleepData);
     this.sleepData = sleepData;
   }
 
@@ -22,7 +21,7 @@ class Sleep extends Fitness {
   }
 
   findSleepDataByDate(id, date) {
-    return this.getUserInfoByDateAndId(id, date, this.sleepData)
+    return this.getUserInfoByDateAndId(id, date, this.sleepData);
   }
 
   calculateDailySleep(id, date) {
@@ -65,7 +64,7 @@ class Sleep extends Fitness {
   determineBestSleepers(date, userRepo, property) {
     let timeline = userRepo.chooseWeekDataForAllUsers(this.sleepData, date);
     let userSleepObject = userRepo.isolateUsernameAndRelevantData(this.sleepData, date, property, timeline);
-    return this.getUserNames(userSleepObject, userRepo)
+    return this.getUserNames(userSleepObject, userRepo);
   }
 
   determineSleepWinnerForWeek(date, userRepo, property) {
@@ -80,7 +79,7 @@ class Sleep extends Fitness {
 
   getBestResults(sortedArray) {
     return sortedArray.filter(element => {
-      return element[Object.keys(element)] === Object.values(sortedArray[0])[0]
+      return element[Object.keys(element)] === Object.values(sortedArray[0])[0];
     });
   }
 

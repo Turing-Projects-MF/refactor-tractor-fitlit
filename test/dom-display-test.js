@@ -9,15 +9,16 @@ const domDisplay = require('../src/dom-display');
 
 describe('domDisplay', function() {
   let id,
-      user,
-      userStorage,
-      activityInfo,
-      hydrationInfo,
-      sleepInfo,
-      dateString,
-      laterDateString,
-      method,
-      winnerId;
+    user,
+    userStorage,
+    activityInfo,
+    hydrationInfo,
+    sleepInfo,
+    dateString,
+    laterDateString,
+    method,
+    randomDay,
+    winnerId;
 
   before(function() {
     global.domDisplay = {};
@@ -35,6 +36,7 @@ describe('domDisplay', function() {
       'makeStepsHTML',
       'makeStairsHTML',
       'makeMinutesHTML',
+      'displayRandomUserHistory',
       'addFriendGameInfo',
       'makeFriendChallengeHTML',
       'makeStepStreakHTML'
@@ -42,20 +44,21 @@ describe('domDisplay', function() {
   });
 
   after(function() {
-      chai.spy.restore(domDisplay);
+    chai.spy.restore(domDisplay);
   });
 
   beforeEach(function() {
-      id = 1;
-      user = {};
-      userStorage = [];
-      activityInfo = [];
-      hydrationInfo = [];
-      sleepInfo = [];
-      dateString = '';
-      laterDateString = '';
-      method = () => {};
-      winnerId = 1;
+    id = 1;
+    user = {};
+    userStorage = [];
+    activityInfo = [];
+    hydrationInfo = [];
+    sleepInfo = [];
+    dateString = '';
+    laterDateString = '';
+    method = () => {};
+    randomDay = '';
+    winnerId = 1;
   });
 
   it('should be able to display details on the sidebar', function() {
@@ -147,6 +150,13 @@ describe('domDisplay', function() {
 
     expect(domDisplay.makeMinutesHTML).to.have.been.called(1);
     expect(domDisplay.makeMinutesHTML).to.have.been.called.with(id, activityInfo, userStorage, method);
+  });
+
+  it('should display a random date of user history', function() {
+    domDisplay.displayRandomUserHistory(randomDay);
+
+    expect(domDisplay.displayRandomUserHistory).to.have.been.called(1);
+    expect(domDisplay.displayRandomUserHistory).to.have.been.called.with(randomDay);
   });
 
   it('should be to add friends game info', function() {

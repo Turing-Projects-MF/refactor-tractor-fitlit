@@ -11,8 +11,8 @@ class UserRepo extends Fitness {
   }
 
   getDataFromUserID(id, dataSet) {
-   return this.filterDataByUserId(id, dataSet);
- }
+    return this.filterDataByUserId(id, dataSet);
+  }
 
   calculateAverageStepGoal(data, property) {
     return this.getAverage(data, property);
@@ -58,9 +58,9 @@ class UserRepo extends Fitness {
   isolateUsernameAndRelevantData(dataSet, date, relevantData, listFromMethod) {
     return listFromMethod.reduce((objectSoFar, dataItem) => {
       if (!objectSoFar[dataItem.userID]) {
-        objectSoFar[dataItem.userID] = [dataItem[relevantData]]
+        objectSoFar[dataItem.userID] = [dataItem[relevantData]];
       } else {
-        objectSoFar[dataItem.userID].push(dataItem[relevantData])
+        objectSoFar[dataItem.userID].push(dataItem[relevantData]);
       }
       return objectSoFar;
     }, {});
