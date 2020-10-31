@@ -2,8 +2,8 @@ import Fitness from './Fitness';
 
 class Activity extends Fitness {
   constructor(activityData) {
-    super(activityData)
-      this.activityData = activityData
+    super(activityData);
+    this.activityData = activityData;
   }
 
   getMilesFromStepsByDate(id, date, userRepo) {
@@ -34,7 +34,7 @@ class Activity extends Fitness {
   }
 
   getStairRecord(id, dataType) {
-  return this.filterDataByUserId(id, dataType)
+    return this.filterDataByUserId(id, dataType)
       .reduce((acc, elem) => (elem.flightsOfStairs > acc) ? elem.flightsOfStairs : acc, 0);
   }
 
@@ -84,7 +84,6 @@ class Activity extends Fitness {
   }
 
   showcaseWinner(user, date, userRepo) {
-    let namedList = this.showChallengeListAndWinner(user, date, userRepo);
     let winner = this.showChallengeListAndWinner(user, date, userRepo).shift();
     return winner;
   }
@@ -113,7 +112,5 @@ class Activity extends Fitness {
     return parseInt(idList[0].join(''));
   }
 }
-
-
 
 export default Activity;

@@ -17,6 +17,7 @@ describe('User', function() {
       dailyStepGoal: 10000,
       friends: [2]
     });
+    
     user2 = new User({
       id: 2,
       name: "Allie McCarthy",
@@ -29,7 +30,6 @@ describe('User', function() {
   });
 
   it('should be a function', function() {
-
     expect(User).to.be.a('function');
   });
 
