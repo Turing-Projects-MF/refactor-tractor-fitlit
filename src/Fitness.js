@@ -5,7 +5,7 @@ class Fitness {
 
   getAverage(data, property = null) {
     return data.reduce((total, value) => {
-      property === null ? total += value : total += value[property]
+      property === null ? total += value : (total += parseFloat(value[property]));
       return total;
     }, 0) / data.length;
   }

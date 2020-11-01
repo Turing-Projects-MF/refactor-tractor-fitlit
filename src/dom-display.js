@@ -33,7 +33,7 @@ let domDisplay = {
   addSleepInfo(id, sleepInfo, dateString, userStorage, laterDateString) {
     $('#sleepToday').prepend(`<p>You slept</p> <p><span class="number">${sleepInfo.calculateDailySleep(id, dateString)}</span></p> <p>hours today.</p>`);
     $('#sleepQualityToday').prepend(`<p>Your sleep quality was</p> <p><span class="number">${sleepInfo.calculateDailySleepQuality(id, dateString)}</span></p><p>out of 5.</p>`);
-    $('#avUserSleepQuality').prepend(`<p>The average user's sleep quality is</p> <p><span class="number">${Math.round(sleepInfo.calculateAllUserSleepQuality() * 100) / 100}</span></p><p>out of 5.</p>`);
+    $('#avUserSleepQuality').prepend(`<p>The average sleep quality of all users is</p> <p><span class="number">${Math.round(sleepInfo.calculateAllUserSleepQuality()).toFixed(1)}</span></p><p>out of 5.</p>`);
     $('#sleepThisWeek').prepend(domDisplay.makeSleepHTML(id, sleepInfo, userStorage, sleepInfo.calculateWeekSleep(dateString, id, userStorage)));
     $('#sleepEarlierWeek').prepend(domDisplay.makeSleepHTML(id, sleepInfo, userStorage, sleepInfo.calculateWeekSleep(laterDateString, id, userStorage)));
   },
