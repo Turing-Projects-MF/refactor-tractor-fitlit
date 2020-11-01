@@ -1,0 +1,331 @@
+* {
+  margin: 0;
+}
+
+body {
+  font-family: "Open Sans";
+  margin: 0;
+  background-color: #4d4e4f;
+  height: auto;
+}
+body h1 {
+  text-align: center;
+  color: #ffffff;
+  height: 80px;
+  padding-top: 10px;
+}
+
+.main {
+  display: flex;
+  flex-direction: row;
+  height: 1500px;
+}
+.main .main__sidebar__body {
+  display: flex;
+  flex-direction: row;
+  width: 25%;
+  height: 100%;
+}
+
+.body__sidebar__sidebarContainer {
+  background-color: #c9dbed;
+  border-width: 1px;
+  border-style: solid;
+  border-color: black;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  overflow: scroll;
+}
+.body__sidebar__sidebarContainer .sidebar__header__name {
+  text-align: center;
+}
+.body__sidebar__sidebarContainer .sidebar__header__userInfo {
+  font-family: sans-serif;
+  font-weight: bold;
+  font-size: 1.2em;
+  margin: 0.5em;
+  width: inherit;
+}
+.body__sidebar__sidebarContainer .sidebar__header__line {
+  color: #ffffff;
+  border-width: 1px;
+  border-style: solid;
+  border-color: black;
+  margin: 1em 1em 0 1em;
+  height: 0;
+  width: 50%;
+}
+.body__sidebar__sidebarContainer .sidebar__header__userImage {
+  border-width: 1px;
+  border-style: solid;
+  border-color: black;
+  border-radius: 50%;
+  height: 200px;
+  width: 200px;
+  margin: 4px 2px 2px 2px;
+  justify-content: center;
+}
+.body__sidebar__sidebarContainer .sidebar__body__friendContainer {
+  display: flex;
+  flex-direction: column;
+}
+.body__sidebar__sidebarContainer .sidebar__friendContainer__listItems {
+  text-align: left;
+}
+
+.body__main__infoContainter {
+  width: 100%;
+  border: 1px solid black;
+  margin: 0 0 1em;
+  display: flex;
+  flex-direction: column;
+  overflow: scroll;
+}
+.body__main__infoContainter .main__column__hydration {
+  display: flex;
+  flex-direction: row;
+  height: 25%;
+}
+.body__main__infoContainter .main__column__activity {
+  display: flex;
+  flex-direction: row;
+  height: 50%;
+}
+.body__main__infoContainter .main__column__sleep {
+  display: flex;
+  flex-direction: row;
+  height: 35%;
+}
+
+.infoContainer__cardContainer__card__horizontal {
+  width: 100%;
+  background-color: #ffffff;
+  border: 1px solid black;
+  margin: 1%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.horizontalCard__activity__container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  width: 100%;
+  overflow: scroll;
+}
+
+.infoContainer__cardContainer__card__vertical {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  background-color: #ffffff;
+  border: 1px solid black;
+  margin: 1%;
+  overflow: scroll;
+}
+
+.card__today__hydration {
+  text-align: center;
+  font-family: sans-serif;
+  display: flex;
+  flex-direction: column;
+  height: auto;
+  justify-content: space-between;
+  font-size: 1.5em;
+  background-color: #66cc66;
+  margin: 0.5em;
+  width: 50%;
+}
+
+.card__today__sleep {
+  text-align: center;
+  font-family: sans-serif;
+  display: flex;
+  flex-direction: column;
+  height: auto;
+  justify-content: space-between;
+  font-size: 1.5em;
+  background-color: #da80da;
+  margin: 0.5em;
+  width: 50%;
+}
+
+.card__today__activity {
+  text-align: center;
+  font-family: sans-serif;
+  display: flex;
+  flex-direction: column;
+  height: auto;
+  justify-content: space-between;
+  font-size: 1.5em;
+  background-color: #c69e3c;
+  margin: 0.3em;
+  width: 40%;
+}
+
+.card__history__hydration {
+  text-align: center;
+  font-family: sans-serif;
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+  justify-content: flex-start;
+  font-size: 1em;
+  margin: 0.5em;
+  background-color: #66cc66;
+}
+
+.card__history__sleep {
+  text-align: center;
+  font-family: sans-serif;
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+  justify-content: flex-start;
+  font-size: 1em;
+  margin: 0.5em;
+  background-color: #da80da;
+}
+
+.card__history__activity {
+  text-align: center;
+  font-family: sans-serif;
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+  justify-content: flex-start;
+  font-size: 1em;
+  margin: 0.5em;
+  background-color: #da80da;
+  height: 93%;
+  overflow: scroll;
+}
+
+.number {
+  font-size: 2em;
+  font-weight: bolder;
+  color: #4d4e4f;
+  -webkit-font-kerning: normal;
+          font-kerning: normal;
+}
+
+.historicalWeek {
+  text-align: center;
+  font-size: 1em;
+  font-weight: bolder;
+  margin: 0.5em;
+  color: black;
+}
+
+.thisWeek {
+  text-align: center;
+  font-size: 1em;
+  font-weight: bolder;
+  margin: 0.5em;
+  color: black;
+}
+
+.card__vertical__list {
+  list-style-type: none;
+  font-weight: lighter;
+  font-style: italic;
+  padding-left: 0;
+  font-size: 1em;
+}
+
+.historical__list__listItem {
+  padding: 0.3em;
+  font-weight: bold;
+  font-family: sans-serif;
+}
+
+.user__inputs {
+  display: flex;
+  justify-content: space-between;
+  color: #ffffff;
+  margin-right: 10px;
+}
+
+.hidden {
+  display: none;
+}
+
+.activity__user__log {
+  display: flex;
+  margin: 0 15px 10px 15px;
+}
+
+.user__labels {
+  margin: 0 15px 5px 15px;
+}
+
+.user__input__button {
+  width: 150px;
+  height: 25px;
+  margin-left: 10px;
+  border: none;
+  outline: none;
+  color: #fff;
+  background: #111;
+  cursor: pointer;
+  position: relative;
+  z-index: 0;
+  border-radius: 10px;
+}
+
+.user__input__button:before {
+  content: "";
+  background: linear-gradient(45deg, #ff0000, #ff7300, #fffb00, #48ff00, #00ffd5, #002bff, #7a00ff, #ff00c8, #ff0000);
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  background-size: 400%;
+  z-index: -1;
+  filter: blur(5px);
+  width: calc(100% + 4px);
+  height: calc(100% + 4px);
+  animation: glowing 20s linear infinite;
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
+  border-radius: 10px;
+}
+
+.user__input__button:active {
+  color: #000;
+}
+
+.user__input__button:active:after {
+  background: transparent;
+}
+
+.user__input__button:hover:before {
+  opacity: 1;
+}
+
+.user__input__button:after {
+  z-index: -1;
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: #111;
+  left: 0;
+  top: 0;
+  border-radius: 10px;
+}
+
+@keyframes glowing {
+  0% {
+    background-position: 0 0;
+  }
+  50% {
+    background-position: 400% 0;
+  }
+  100% {
+    background-position: 0 0;
+  }
+}
