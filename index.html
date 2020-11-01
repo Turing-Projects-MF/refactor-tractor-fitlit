@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF__8">
+  <title>Activity Tracker</title>
+  <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Open+Sans:400,800&display=swap" rel="stylesheet" />
+</head>
+
+<body>
+  <h1 id="headerText">Activity Tracker</h1>
+  <section class="activity__user__log">
+    <label class="user__inputs" id="activity__dropdown" for="userActivityLog">Log an Activity:</label>
+    <select aria-labelledby="activity__dropdown" name="userActivityLog" id="user__activities">
+      <option disabled selected value> -- choose an activity -- </option>
+      <option value="Hydration">Hydration</option>
+      <option value="Sleep">Sleep</option>
+      <option value="Walking">Walking</option>
+    </select>
+
+
+    <form class="user__inputs hidden" id="user__activity__input">
+      <label class="user__labels" id="userSteps" for="userStepsInput">Number of Steps:</label><br>
+      <input aria-labelledby="userSteps" type="number" min="0" id="number__of__steps" name="userStepsInput" placeholder="Enter Steps.."><br>
+      <label class="user__labels" id="userActive" for="userMinutesInput">Active Minutes:</label><br>
+      <input aria-labelledby="userActive" type="number" min="0" id="active__minutes" name="userMinutesInput" placeholder="Enter Minutes..">
+      <label class="user__labels" id="userStairs" for="userFlightsInput">Flight of Stairs:</label><br>
+      <input aria-labelledby="userStairs" type="number" min="0" id="flights_stairs" name="userFlightsInput" placeholder="Enter Flights..">
+      <button class="user__input__button" type="button">Submit Activity</button>
+    </form>
+    <form class="user__inputs hidden" id="user__sleep__input">
+      <label class="user__labels" id="userSleep" for="userSleepInput">Hours Slept:</label><br>
+      <input aria-labelledby="userSleep" type="number" min="0" id="hours__slept" name="userSleepInput" placeholder="Enter Hours Slept.."><br>
+      <label class="user__labels" id="userSleepQuality" for="userSleepQualityInput">Sleep Quality</label><br>
+      <input aria-labelledby="userSleepQuality" type="number" min="0" id="sleep__quality" name="userSleepQualityInput" placeholder="Enter Sleep Quality..">
+      <button class="user__input__button" type="button">Submit Activity</button>
+    </form>
+    <form class="user__inputs hidden" id="user__hydration__input">
+      <label class="user__labels" id="userHydration" for="userHydrationInput">Total Ounces</label><br>
+      <input aria-labelledby="userHydration" type="number" min="0" id="total__water" name="userHydrationInput" placeholder="Enter Ounces Drank.."><br>
+      <button class="user__input__button" type="button">Submit Activity</button>
+    </form>
+  </section>
+
+
+  <main class="main">
+    <article class="main__sidebar__body" tabindex="0">
+      <section class="body__sidebar__sidebarContainer">
+        <h2 class="sidebar__header__name" id="sidebarName"></h2>
+        <div class="sidebar__header__line"></div>
+        <img src="./images/The Rock.jpg" class="sidebar__header__userImage" alt="The Rock headshot"></img>
+        <div class="sidebar__header__line"></div>
+        <p class="sidebar__header__userInfo" id="userAddress"></p>
+        <div class="sidebar__header__line"></div>
+        <p class="sidebar__header__userInfo" id="userEmail"></p>
+        <div class="sidebar__header__line"></div>
+        <p class="sidebar__header__userInfo" id="userStridelength"></p>
+        <div class="sidebar__header__line"></div>
+        <p class="sidebar__header__userInfo" id="stepGoalCard"></p>
+        <p class="sidebar__header__userInfo" id="avStepGoalCard"></p>
+        <div class="sidebar__header__line"></div>
+        <section class="sidebar__body__friendContainer">
+          <p class="sidebar__header__userInfo">Friends</p>
+          <section class="sidebar__friendContainer__listItems">
+            <ul class="card__vertical__list" id="friendList">
+              <!-- <!____ friend list goes here ____> -->
+            </ul>
+          </section>
+          <div class="sidebar__header__line"></div>
+          <p class="thisWeek">Keep up the good work! You were increasingly active on these dates:</p>
+          <ul class="card__vertical__list" id="streakListMinutes">
+            <!-- <!____ friend list goes here ____> -->
+          </ul>
+        </section>
+      </section>
+    </article>
+    <article class="body__main__infoContainter">
+      <section class="main__column__hydration">
+        <section class="infoContainer__cardContainer__card__horizontal" tabindex="0">
+          <div class="card__today__hydration">
+            <p id="hydrationToday"></p>
+          </div>
+          <div class="card__today__hydration">
+            <p id="hydrationAverage"></p>
+          </div>
+        </section>
+        <section class="infoContainer__cardContainer__card__vertical">
+          <div class="card__history__hydration" tabindex="0">
+            <p class="thisWeek">Water intake this week:</p>
+            <div class="sidebar__header__line"></div>
+            <ul class="card__vertical__list" id="hydrationThisWeek">
+              <!-- <!____ Hydration week list goes here ____> -->
+            </ul>
+          </div>
+          <div class="card__history__hydration" tabindex="0">
+            <p class="historicalWeek"></p>
+            <div class="sidebar__header__line"></div>
+            <ul class="card__vertical__list" id="hydrationEarlierWeek">
+              <!-- <!____ Hydration week list goes here ____> -->
+            </ul>
+          </div>
+        </section>
+      </section>
+      <section class="main__column__activity">
+        <section class="infoContainer__cardContainer__card__horizontal" tabindex="0">
+          <section class="horizontalCard__activity__container">
+            <div class="card__today__activity" >
+              <p id="userStepsToday"></p>
+            </div>
+            <div class="card__today__activity">
+              <p id="avgStepsToday"></p>
+            </div>
+          </section>
+          <section class="horizontalCard__activity__container">
+            <div class="card__today__activity">
+              <p id="userStairsToday"></p>
+            </div>
+            <div class="card__today__activity">
+              <p id="avgStairsToday"></p>
+            </div>
+          </section>
+          <section class="horizontalCard__activity__container">
+            <div class="card__today__activity">
+              <p id="userMinutesToday"></p>
+            </div>
+            <div class="card__today__activity">
+              <p id="avgMinutesToday"></p>
+            </div>
+          </section>
+        </section>
+        <section class="infoContainer__cardContainer__card__horizontal">
+          <section class="horizontalCard__activity__container">
+            <div class="card__history__activity" tabindex="0">
+              <p class="thisWeek">Your steps this week</p>
+              <div class="sidebar__header__line"></div>
+              <ul class="card__vertical__list" id="userStepsThisWeek">
+                <!-- <!____ Activity week list goes here ____> -->
+              </ul>
+            </div>
+            <div class="card__history__activity" tabindex="0">
+              <p class="thisWeek">Your stair count this week</p>
+              <div class="sidebar__header__line"></div>
+              <ul class="card__vertical__list" id="userStairsThisWeek">
+                <!-- <!____ Activity week list goes here ____> -->
+              </ul>
+            </div>
+          </section>
+          <section class="horizontalCard__activity__container">
+            <div class="card__history__activity" tabindex="0">
+              <p class="thisWeek">Your minutes of activity this week</p>
+              <div class="sidebar__header__line"></div>
+              <ul class="card__vertical__list" id="userMinutesThisWeek">
+                <!-- <!____ Activity week list goes here ____> -->
+              </ul>
+            </div>
+            <div class="card__history__activity" tabindex="0">
+              <p class="thisWeek">Winner's steps this week</p>
+              <div class="sidebar__header__line"></div>
+              <ul class="card__vertical__list" id="bestUserSteps">
+                <!-- <!____ Activity week list goes here ____> -->
+              </ul>
+            </div>
+          </section>
+        </section>
+      </section>
+      <section class="main__column__sleep">
+        <section class="infoContainer__cardContainer__card__horizontal" tabindex="0">
+          <div class="card__today__sleep">
+            <p id="sleepToday"></p>
+          </div>
+          <div class="card__today__sleep">
+            <p id="sleepQualityToday"></p>
+          </div>
+          <div class="card__today__sleep">
+            <p id="avUserSleepQuality"></p>
+          </div>
+        </section>
+        <section class="infoContainer__cardContainer__card__vertical">
+          <div class="card__history__sleep" tabindex="0">
+            <p class="thisWeek">Hours of sleep this week</p>
+            <div class="sidebar__header__line"></div>
+            <ul class="card__vertical__list" id="sleepThisWeek">
+              <!-- <!____ Sleep week list goes here ____> -->
+            </ul>
+          </div>
+          <div class="card__history__sleep" tabindex="0">
+            <p class="historicalWeek"></p>
+            <div class="sidebar__header__line"></div>
+            <ul class="card__vertical__list" id="sleepEarlierWeek">
+              <!-- <!____ Sleep week list goes here ____> -->
+            </ul>
+          </div>
+        </section>
+      </section>
+    </article>
+    <article class="main__sidebar__body" tabindex="0">
+      <section class="body__sidebar__sidebarContainer">
+        <h2 class="sidebar__header__name" id="sidebarName">FRIENDLY STEP CHALLENGE!</h2>
+        <div class="sidebar__header__line"></div>
+        <img src="./images/person walking on path.jpg" class="sidebar__header__userImage" alt="Person walking down a path"></img>
+        <div class="sidebar__header__line"></div>
+        <p class="sidebar__header__userInfo" id="bigWinner"></p>
+        <div class="sidebar__header__line"></div>
+        <p class="sidebar__header__userInfo" id="stepGoalCard"></p>
+        <p class="sidebar__header__userInfo" id="avStepGoalCard"></p>
+          <section class="sidebar__body__friendContainer">
+            <section class="sidebar__friendContainer__listItems">
+              <p class="thisWeek">Rank this week</p>
+              <ul class="card__vertical__list" id="friendChallengeListToday">
+                  <!-- <!____ friend list goes here ____> -->
+              </ul>
+              <div class="sidebar__header__line"></div>
+              <p class="historicalWeek">__ Historical Rank</p>
+              <ul class="card__vertical__list" id="friendChallengeListHistory">
+                <!-- <!____ friend list goes here ____> -->
+              </ul>
+              <div class="sidebar__header__line"></div>
+            </section>
+            <p class="thisWeek">You had 3 DAY STEP STREAKS on these days:</p>
+            <ul class="card__vertical__list" id="streakList">
+                <!-- <!____ friend list goes here ____> -->
+            </ul>
+          </section>
+      </section>
+    </article>
+  </main>
+<script type="text/javascript" src="main.bundle.js"></script></body>
+<script type="text/javascript" src="scripts.js"></script>
+</html>
