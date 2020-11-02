@@ -1,4 +1,6 @@
-# Refactor Tractor FitLit *group project*
+# [Refactor Tractor FitLit](https://mdflynn.github.io/refactor-tractor-fitlit/) *group project*
+
+<img width="1436" alt="Screen Shot 2020-11-02 at 1 10 16 PM" src="https://user-images.githubusercontent.com/63012953/97914826-b8f86900-1d0d-11eb-8cca-423af190eac4.png">
 
 ## Table of Contents
 
@@ -40,12 +42,12 @@ This was a Mod 2 project from Turing School of Software and Design. The goals we
 
 * *Click* the **Fork** button on the top right-hand corner of this page
 * Clone the repository down and cd into the repo on your local machine by running:
-  * `git clone <url>`
+  * `git clone git@github.com:mdflynn/refactor-tractor-fitlit.git`
   * `cd refactor-tractor-fitlit`
 * Install the library dependencies by running:
   * `npm install`
 * To verify that it is setup correctly, run `npm start` in your terminal.
-* Go to `http://localhost:8080/` and you should see a page with some `h1` text and a pink background. If that's the case, you're good to go.
+* Go to `http://localhost:8080/` and you should see the site.
 * Enter `control + c` in your terminal to stop the server at any time.
 </details>
 
@@ -69,6 +71,10 @@ This was a Mod 2 project from Turing School of Software and Design. The goals we
 * Add a calendar option for the user to select dates for entering relative information
 * Ability to create new account/user
 * Add more sad path testing
+
+## Project Manager:
+
+#### Bob Gu
 
 ## Contributors
 <img src="https://avatars0.githubusercontent.com/u/66269306?s=400&u=b59f8ccc1002269319d952aa028ee270629b2ead&v=4" alt="Olga Morgan"
