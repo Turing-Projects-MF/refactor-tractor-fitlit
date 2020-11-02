@@ -353,7 +353,7 @@ describe('Sleep', function() {
   });
 
   it('should calculate all users sleep quality', function() {
-    expect(sleep.calculateAllUserSleepQuality().toFixed(2)).to.eql("2.98");
+    expect(sleep.calculateAllUserSleepQuality()).to.eql("3.0");
   });
 
   it('should return user names', function() {

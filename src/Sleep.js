@@ -43,7 +43,7 @@ class Sleep extends Fitness {
   }
 
   calculateAllUserSleepQuality() {
-    var totalSleepQuality = this.getAverage(this.sleepData, "sleepQuality");
+    var totalSleepQuality = this.getAverage(this.sleepData, "sleepQuality").toFixed(1);
     return totalSleepQuality;
   }
 
